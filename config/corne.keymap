@@ -34,7 +34,7 @@
         };
 
         combo_at {
-            bindings = <&kp AT_SIGN>;
+            bindings = <&kp AT>;
             key-positions = <1 1 2>;
             layers = <1>;
         };
