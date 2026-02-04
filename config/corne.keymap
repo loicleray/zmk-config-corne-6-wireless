@@ -9,6 +9,81 @@
 #include <dt-bindings/zmk/keys.h>
 
 / {
+    combos {
+        compatible = "zmk,combos";
+
+        combo_exlamation {
+            bindings = <&kp EXCLAMATION>;
+            key-positions = <0 1>;
+            layers = <1>;
+        };
+
+        combo_at {
+            bindings = <&kp AT_SIGN>;
+            key-positions = <1 1 2>;
+            layers = <1>;
+        };
+
+        combo_hash {
+            bindings = <&kp HASH>;
+            key-positions = <2 3>;
+            layers = <1>;
+        };
+
+        combo_dollar {
+            bindings = <&kp DOLLAR>;
+            key-positions = <3 4>;
+            layers = <1>;
+        };
+
+        combo_percent {
+            bindings = <&kp PERCENT>;
+            key-positions = <5 4>;
+            layers = <1>;
+        };
+
+        combo_carrot {
+            bindings = <&kp CARET>;
+            key-positions = <5 6>;
+        };
+
+        combo_ampersand {
+            bindings = <&kp AMPERSAND>;
+            key-positions = <6 7>;
+        };
+
+        combo_asterix {
+            bindings = <&kp ASTERISK>;
+            key-positions = <7 8>;
+        };
+
+        combo_parentheses-left {
+            bindings = <&kp LEFT_PARENTHESIS>;
+            key-positions = <9 10>;
+        };
+
+        combo_parentheses-right {
+            bindings = <&kp RIGHT_PARENTHESIS>;
+            key-positions = <9 10>;
+        };
+
+        combo_minus {
+            bindings = <&kp KP_SUBTRACT>;
+            key-positions = <10 11>;
+        };
+
+        combo_plus {
+            bindings = <&kp PLUS>;
+            key-positions = <11 23>;
+        };
+
+        combo_tilde {
+            bindings = <&kp TILDE>;
+            key-positions = <0 12>;
+            layers = <1>;
+        };
+    };
+
     keymap {
         compatible = "zmk,keymap";
 
@@ -21,10 +96,10 @@
 
             display-name = "Base";
             bindings = <
-&kp TAB    &kp Q  &kp W  &kp E         &kp R             &kp T           &kp Y        &kp U  &kp I      &kp O    &kp P     &kp BSPC
-&kp LCTRL  &kp A  &kp S  &kp D         &kp F             &kp G           &kp H        &kp J  &kp K      &kp L    &kp SEMI  &kp ENTER
-&kp LSHFT  &kp Z  &kp X  &kp C         &kp V             &kp B           &kp N        &kp M  &kp COMMA  &kp DOT  &kp FSLH  &kp ESC
-                         &kp LEFT_ALT  &kp LEFT_CONTROL  &kp LEFT_GUI    &lt 1 SPACE  &mo 2  &kp RALT
+&mt TAB ESC  &kp Q  &kp W  &kp E         &kp R             &kp T           &kp Y        &kp U  &kp I      &kp O    &kp P     &kp BSPC
+&kp LCTRL    &kp A  &kp S  &kp D         &kp F             &kp G           &kp H        &kp J  &kp K      &kp L    &kp SEMI  &kp ENTER
+&kp LSHFT    &kp Z  &kp X  &kp C         &kp V             &kp B           &kp N        &kp M  &kp COMMA  &kp DOT  &kp FSLH  &kp ESC
+                           &kp LEFT_ALT  &kp LEFT_CONTROL  &kp LEFT_GUI    &lt 1 SPACE  &mo 2  &kp RALT
             >;
         };
 
