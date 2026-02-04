@@ -3,7 +3,6 @@
  *
  * SPDX-License-Identifier: MIT
  */
-
 /*
 * Corne 6 - key layout and numbering: 
 *
@@ -22,7 +21,7 @@
     combos {
         compatible = "zmk,combos";
 
-        combo_tilde {
+        combo_grave {
             bindings = <&kp GRAVE>;
             key-positions = <0 12>;
             layers = <1>;
@@ -61,66 +60,68 @@
         combo_caret {
             bindings = <&kp CARET>;
             key-positions = <5 6>;
+            layers = <1>;
         };
 
         combo_ampersand {
             bindings = <&kp AMPERSAND>;
             key-positions = <6 7>;
+            layers = <1>;
         };
 
         combo_asteris {
             bindings = <&kp ASTERISK>;
             key-positions = <7 8>;
+            layers = <1>;
         };
 
         combo_parentheses-left {
             bindings = <&kp LEFT_PARENTHESIS>;
-            key-positions = <9 10>;
+            key-positions = <9 8>;
+            layers = <1>;
         };
 
         combo_parentheses-right {
             bindings = <&kp RIGHT_PARENTHESIS>;
             key-positions = <9 10>;
+            layers = <1>;
         };
 
         combo_minus {
             bindings = <&kp KP_SUBTRACT>;
             key-positions = <10 11>;
+            layers = <1>;
         };
 
         combo_plus {
             bindings = <&kp PLUS>;
             key-positions = <11 23>;
+            layers = <1>;
         };
 
         combo_tilde {
             bindings = <&kp TILDE>;
             key-positions = <0 12>;
-            layers = <1>;
         };
 
         combo_caps-lock {
             bindings = <&kt CAPSLOCK>;
-            key-positions = <12 13>;
-            layers = <1>;
+            key-positions = <12 24>;
         };
 
         combo_pipe {
             bindings = <&kp BACKSLASH>;
             key-positions = <23 22>;
-            layers = <1>;
         };
 
         combo_brackets-right {
             bindings = <&kp RIGHT_BRACKET>;
             key-positions = <22 21>;
-            layers = <1>;
         };
 
         combo_brackets-left {
             bindings = <&kp LEFT_BRACKET>;
             key-positions = <21 20>;
-            layers = <1>;
         };
     };
 
