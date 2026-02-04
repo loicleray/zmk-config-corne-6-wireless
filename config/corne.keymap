@@ -88,6 +88,24 @@
             key-positions = <12 13>;
             layers = <1>;
         };
+
+        combo_pipe {
+            bindings = <&kp BACKSLASH>;
+            key-positions = <23 22>;
+            layers = <1>;
+        };
+
+        combo_brackets-right {
+            bindings = <&kp RIGHT_BRACKET>;
+            key-positions = <22 21>;
+            layers = <1>;
+        };
+
+        combo_brackets-left {
+            bindings = <&kp LEFT_BRACKET>;
+            key-positions = <21 20>;
+            layers = <1>;
+        };
     };
 
     keymap {
