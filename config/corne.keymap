@@ -35,7 +35,7 @@
 
         combo_at {
             bindings = <&kp AT>;
-            key-positions = <1 1 2>;
+            key-positions = <1 2>;
             layers = <1>;
         };
 
@@ -53,7 +53,7 @@
 
         combo_percent {
             bindings = <&kp PERCENT>;
-            key-positions = <5 4>;
+            key-positions = <4 5>;
             layers = <1>;
         };
 
@@ -77,7 +77,7 @@
 
         combo_parentheses-left {
             bindings = <&kp LEFT_PARENTHESIS>;
-            key-positions = <9 8>;
+            key-positions = <8 9>;
             layers = <1>;
         };
 
@@ -99,11 +99,6 @@
             layers = <1>;
         };
 
-        combo_tilde {
-            bindings = <&kp TILDE>;
-            key-positions = <0 12>;
-        };
-
         combo_caps-lock {
             bindings = <&kt CAPSLOCK>;
             key-positions = <12 24>;
@@ -111,17 +106,17 @@
 
         combo_pipe {
             bindings = <&kp BACKSLASH>;
-            key-positions = <23 22>;
+            key-positions = <22 23>;
         };
 
         combo_brackets-right {
             bindings = <&kp RIGHT_BRACKET>;
-            key-positions = <22 21>;
+            key-positions = <21 22>;
         };
 
         combo_brackets-left {
             bindings = <&kp LEFT_BRACKET>;
-            key-positions = <21 20>;
+            key-positions = <20 21>;
         };
     };
 
