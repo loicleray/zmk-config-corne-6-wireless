@@ -27,7 +27,7 @@
             flavor = "tap-preferred";
             retro-tap;
             bindings = <&kp>, <&kp>;
-            };
+        };
     };
 
     combos {
