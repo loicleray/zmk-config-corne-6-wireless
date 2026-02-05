@@ -139,8 +139,8 @@
             bindings = <
 &mt TAB ESC  &kp Q  &kp W  &kp E         &kp R             &kp T                 &kp Y        &kp U  &kp I      &kp O    &kp P     &kp BSPC
 &kp GLOBE    &kp A  &kp S  &kp D         &kp F             &kp G                 &kp H        &kp J  &kp K      &kp L    &kp SEMI  &kp ENTER
-&kp LSHFT    &kp Z  &kp X  &kp C         &kp V             &kp B                 &kp N        &kp M  &kp COMMA  &kp DOT  &kp FSLH  &none
-                           &kp LEFT_ALT  &kp LEFT_CONTROL  &mt LEFT_GUI SPACE    &lt 1 SPACE  &mo 2  &none
+&kp LSHFT    &kp Z  &kp X  &kp C         &kp V             &kp B                 &kp N        &kp M  &kp COMMA  &kp DOT  &kp FSLH  &kp RIGHT_SHIFT
+                           &kp LEFT_ALT  &kp LEFT_CONTROL  &mt LEFT_GUI SPACE    &lt 1 SPACE  &mo 2  &mo 3
             >;
         };
 
@@ -169,14 +169,14 @@
 
             display-name = "Raise";
             bindings = <
-&kp TAB    &kp EXCL  &kp AT  &kp HASH  &kp DLLR  &kp PRCNT    &kp CARET  &kp AMPS   &kp KP_MULTIPLY  &kp LPAR  &kp RPAR  &kp BSPC
-&kp LCTRL  &trans    &trans  &trans    &trans    &trans       &kp MINUS  &kp EQUAL  &kp LBKT         &kp RBKT  &kp BSLH  &kp GRAVE
-&kp LSHFT  &trans    &trans  &trans    &trans    &trans       &kp UNDER  &kp PLUS   &kp LBRC         &kp RBRC  &kp PIPE  &kp TILDE
-                             &kp LGUI  &trans    &kp SPACE    &kp RET    &trans     &kp RALT
+&kp TAB    &kp EXCL        &kp UP_ARROW    &kp HASH          &kp DLLR      &kp PRCNT       &kp CARET  &kp AMPS   &kp KP_MULTIPLY  &kp LPAR  &kp RPAR  &kp BSPC
+&kp LCTRL  &kp LEFT_ARROW  &kp DOWN_ARROW  &kp RIGHT         &trans        &trans          &kp MINUS  &kp EQUAL  &kp LBKT         &kp RBKT  &kp BSLH  &kp GRAVE
+&kp LSHFT  &trans          &trans          &trans            &trans        &trans          &kp UNDER  &kp PLUS   &kp LBRC         &kp RBRC  &kp PIPE  &kp TILDE
+                                           &kp LEFT_CONTROL  &kp LEFT_ALT  &kp LEFT_GUI    &kp RET    &trans     &kp RALT
             >;
         };
 
-        extra_1 { status = "reserved"; };
+        settings { status = "reserved"; };
 
         extra_2 { status = "reserved"; };
 
