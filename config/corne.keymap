@@ -118,7 +118,7 @@
 
         combo_backslash {
             bindings = <&kp BACKSLASH>;
-            key-positions = <22 23>;
+            key-positions = <23 11>;
         };
 
         combo_brackets-right {
@@ -135,6 +135,11 @@
             bindings = <&kp TILDE>;
             key-positions = <0 12>;
             layers = <0>;
+        };
+
+        combo_quotes {
+            bindings = <&kp SINGLE_QUOTE>;
+            key-positions = <23 22>;
         };
     };
 
