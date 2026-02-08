@@ -188,9 +188,9 @@
 
             display-name = "Raise";
             bindings = <
-&trans  &none         &none           &kp UP_ARROW    &none            &kp C_VOL_UP    &kp C_BRI_UP   &msc SCRL_LEFT  &mmv MOVE_UP    &msc SCRL_RIGHT  &msc SCRL_UP    &trans
+&trans  &bt BT_CLR    &none           &kp UP_ARROW    &none            &kp C_VOL_UP    &kp C_BRI_UP   &msc SCRL_LEFT  &mmv MOVE_UP    &msc SCRL_RIGHT  &msc SCRL_UP    &trans
 &trans  &none         &kp LEFT_ARROW  &kp DOWN_ARROW  &kp RIGHT_ARROW  &kp C_VOL_DN    &kp C_BRI_DEC  &mmv MOVE_LEFT  &mmv MOVE_DOWN  &mmv MOVE_RIGHT  &msc SCRL_DOWN  &trans
-&trans  &bt BT_SEL 0  &bt BT_SEL 1    &bt BT_SEL 2    &bt BT_SEL 3     &bt BT_SEL 4    &bt BT_CLR     &mkp MB1        &mkp MB3        &mkp MB2         &none           &trans
+&trans  &bt BT_SEL 0  &bt BT_SEL 1    &bt BT_SEL 2    &bt BT_SEL 3     &bt BT_SEL 4    &none          &mkp MB1        &mkp MB3        &mkp MB2         &none           &trans
                                       &trans          &trans           &trans          &trans         &trans          &trans
             >;
         };
