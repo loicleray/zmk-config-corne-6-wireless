@@ -1,4 +1,10 @@
-A simple Corne Keyboard layout. Optimised to be as close to standard Mac keyboard as reasonable.
+# Mac Focused Corne ZMK Keyboard Layout
+
+A simple Corne Keyboard layout, optimised for:
+- almost standard mac keyboard key positioning
+- heavily using combos
+- basic mouse emulation
+- ZMK (nice!nano)
 
 Layout as follows:
-<img width="900" height="1048" alt="my_keymap" src="https://github.com/user-attachments/assets/916cc0b7-59d6-4a3d-8014-6baeed55f166" />
+<img width="900" height="1048" alt="my_keymap-2" src="https://github.com/user-attachments/assets/e6c88c9d-bb2c-4cc5-a864-f0c8001e7fae" />
