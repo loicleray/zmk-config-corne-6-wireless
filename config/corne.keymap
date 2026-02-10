@@ -12,16 +12,15 @@
 *      24  25  26  27  28  29                30  31  32  33  34  35
 *                     36  37  38           39  40  41
 */
+/*
+ * Add mouse emulation, see: https://v0-3-branch.zmk.dev/docs/keymaps/behaviors/mouse-emulation
+ */
+
+#define ZMK_POINTING_DEFAULT_MOVE_VAL 450
 
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/keys.h>
-
-
-/*
- * Add mouse emulation, see: https://v0-3-branch.zmk.dev/docs/keymaps/behaviors/mouse-emulation
- */
-#define ZMK_POINTING_DEFAULT_MOVE_VAL 450
 #include <dt-bindings/zmk/pointing.h>
 
 / {
@@ -194,10 +193,10 @@
 
             display-name = "Raise";
             bindings = <
-&trans  &bt BT_CLR    &none           &kp UP_ARROW    &none            &kp C_VOL_UP    &kp C_BRI_UP   &msc SCRL_LEFT  &mmv MOVE_UP    &msc SCRL_RIGHT  &msc SCRL_UP    &trans
-&trans  &none         &kp LEFT_ARROW  &kp DOWN_ARROW  &kp RIGHT_ARROW  &kp C_VOL_DN    &kp C_BRI_DEC  &mmv MOVE_LEFT  &mmv MOVE_DOWN  &mmv MOVE_RIGHT  &msc SCRL_DOWN  &trans
-&trans  &bt BT_SEL 0  &bt BT_SEL 1    &bt BT_SEL 2    &bt BT_SEL 3     &bt BT_SEL 4    &none          &mkp MB1        &mkp MB3        &mkp MB2         &none           &trans
-                                      &trans          &trans           &trans          &trans         &trans          &trans
+&trans  &bt BT_CLR    &none           &kp UP_ARROW    &none            &kp C_VOL_UP    &kp C_BRI_UP   &msc SCRL_RIGHT  &mmv MOVE_UP    &msc SCRL_LEFT   &msc SCRL_DOWN  &trans
+&trans  &none         &kp LEFT_ARROW  &kp DOWN_ARROW  &kp RIGHT_ARROW  &kp C_VOL_DN    &kp C_BRI_DEC  &mmv MOVE_LEFT   &mmv MOVE_DOWN  &mmv MOVE_RIGHT  &msc SCRL_UP    &trans
+&trans  &bt BT_SEL 0  &bt BT_SEL 1    &bt BT_SEL 2    &bt BT_SEL 3     &bt BT_SEL 4    &none          &mkp MB1         &mkp MB3        &mkp MB2         &none           &trans
+                                      &trans          &trans           &trans          &trans         &trans           &trans
             >;
         };
 
