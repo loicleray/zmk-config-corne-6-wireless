@@ -16,7 +16,7 @@
  * Add mouse emulation, see: https://v0-3-branch.zmk.dev/docs/keymaps/behaviors/mouse-emulation
  */
 
-#define ZMK_POINTING_DEFAULT_MOVE_VAL 450
+#define ZMK_POINTING_DEFAULT_MOVE_VAL 525
 
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/bt.h>
