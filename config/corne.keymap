@@ -110,12 +110,6 @@
             key-positions = <10 11>;
             layers = <1>;
         };
-        
-        combo_plus_equals {
-            bindings = <&kp PLUS>;
-            key-positions = <11 23>;
-            layers = <1>;
-        };
 
         combo_caps-lock {
             bindings = <&kt CAPSLOCK>;
@@ -127,7 +121,6 @@
             key-positions = <23 11>;
             layers = <0>;
         };
-
 
         combo_brackets-right {
             bindings = <&kp RIGHT_BRACKET>;
@@ -158,6 +151,12 @@
         combo_parenthesis-right {
             bindings = <&kp RIGHT_PARENTHESIS>;
             key-positions = <9 10>;
+        };
+
+        combo_plus_equals {
+            bindings = <&kp PLUS>;
+            key-positions = <11 23>;
+            layers = <1>;
         };
     };
 
