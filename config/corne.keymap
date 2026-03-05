@@ -110,8 +110,8 @@
             key-positions = <10 11>;
             layers = <1>;
         };
-
-        combo_plus {
+        
+        combo_equal_plus {
             bindings = <&kp EQUAL>;
             key-positions = <11 23>;
             layers = <1>;
@@ -125,7 +125,9 @@
         combo_backslash {
             bindings = <&kp BACKSLASH>;
             key-positions = <23 11>;
+            layers = <0>;
         };
+
 
         combo_brackets-right {
             bindings = <&kp RIGHT_BRACKET>;
