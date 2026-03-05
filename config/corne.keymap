@@ -112,7 +112,7 @@
         };
 
         combo_plus {
-            bindings = <&kp LG(EQUAL)>;
+            bindings = <&kp EQUAL>;
             key-positions = <11 23>;
             layers = <1>;
         };
