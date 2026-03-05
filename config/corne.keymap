@@ -111,8 +111,8 @@
             layers = <1>;
         };
         
-        combo_equal_plus {
-            bindings = <&kp EQUAL>;
+        combo_plus_equals {
+            bindings = <&kp PLUS>;
             key-positions = <11 23>;
             layers = <1>;
         };
