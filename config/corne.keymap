@@ -174,7 +174,7 @@
 &mt TAB ESC  &kp Q  &kp W  &kp E         &kp R             &kp T             &kp Y        &kp U  &kp I      &kp O    &kp P     &kp BSPC
 &none        &kp A  &kp S  &kp D         &kp F             &kp G             &kp H        &kp J  &kp K      &kp L    &kp SEMI  &kp ENTER
 &kp LSHFT    &kp Z  &kp X  &kp C         &kp V             &kp B             &kp N        &kp M  &kp COMMA  &kp DOT  &kp FSLH  &kp RIGHT_SHIFT
-                           &kp LEFT_ALT  &kp LEFT_CONTROL  &mt LGUI SPACE    &lt 1 SPACE  &mo 2  &mo 3
+                           &kp LEFT_ALT  &kp LEFT_CONTROL  &mt LGUI SPACE    &lt 1 SPACE  &mo 2  &mo 0
             >;
         };
 
@@ -203,17 +203,21 @@
 
             display-name = "Raise";
             bindings = <
-&trans  &bt BT_CLR    &none           &kp UP_ARROW    &none            &kp C_VOL_UP    &kp C_BRI_UP   &msc SCRL_RIGHT  &mmv MOVE_UP    &msc SCRL_LEFT   &msc SCRL_DOWN  &trans
-&trans  &none         &kp LEFT_ARROW  &kp DOWN_ARROW  &kp RIGHT_ARROW  &kp C_VOL_DN    &kp C_BRI_DEC  &mmv MOVE_LEFT   &mmv MOVE_DOWN  &mmv MOVE_RIGHT  &msc SCRL_UP    &trans
-&trans  &bt BT_SEL 0  &bt BT_SEL 1    &bt BT_SEL 2    &bt BT_SEL 3     &bt BT_SEL 4    &none          &mkp MB1         &mkp MB3        &mkp MB2         &none           &trans
-                                      &trans          &trans           &trans          &trans         &trans           &trans
+&trans  &bt BT_CLR    &none           &kp UP_ARROW    &none            &kp C_BRI_UP    &kp C_VOLUME_UP    &msc SCRL_RIGHT  &mmv MOVE_UP    &msc SCRL_LEFT   &msc SCRL_DOWN  &trans
+&trans  &none         &kp LEFT_ARROW  &kp DOWN_ARROW  &kp RIGHT_ARROW  &kp C_BRI_DN    &kp C_VOLUME_DOWN  &mmv MOVE_LEFT   &mmv MOVE_DOWN  &mmv MOVE_RIGHT  &msc SCRL_UP    &trans
+&trans  &bt BT_SEL 0  &bt BT_SEL 1    &bt BT_SEL 2    &bt BT_SEL 3     &bt BT_SEL 4    &none              &mkp MB1         &mkp MB3        &mkp MB2         &none           &trans
+                                      &trans          &trans           &trans          &trans             &trans           &trans
             >;
         };
 
-        settings { status = "reserved"; };
-
-        extra_2 { status = "reserved"; };
-
-        extra_3 { status = "reserved"; };
+        settings {
+            display-name = "Raise";
+            bindings = <
+&trans  &trans  &none           &kp UP_ARROW    &none            &trans    &msc SCRL_DOWN  &msc SCRL_RIGHT  &kp UP_ARROW    &msc SCRL_LEFT   &trans  &trans
+&trans  &none   &kp LEFT_ARROW  &kp DOWN_ARROW  &kp RIGHT_ARROW  &trans    &msc SCRL_UP    &kp LEFT_ARROW   &kp DOWN_ARROW  &kp RIGHT_ARROW  &trans  &trans
+&trans  &trans  &trans          &trans          &trans           &trans    &none           &trans           &trans          &trans           &none   &trans
+                                &trans          &trans           &trans    &trans          &trans           &trans
+            >;
+        };
     };
 };
