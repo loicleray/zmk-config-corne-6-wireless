@@ -141,6 +141,7 @@
         combo_quotes {
             bindings = <&kp SINGLE_QUOTE>;
             key-positions = <23 22>;
+            layers = <0>;
         };
 
         combo_parenthesis-left {
