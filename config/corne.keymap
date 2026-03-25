@@ -39,12 +39,6 @@
     combos {
         compatible = "zmk,combos";
 
-        combo_grave {
-            bindings = <&kp GRAVE>;
-            key-positions = <0 12>;
-            layers = <1>;
-        };
-
         combo_exclamation {
             bindings = <&kp EXCLAMATION>;
             key-positions = <0 1>;
@@ -135,7 +129,6 @@
         combo_tilde {
             bindings = <&kp TILDE>;
             key-positions = <0 12>;
-            layers = <0>;
         };
 
         combo_quotes {
