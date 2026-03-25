@@ -127,7 +127,7 @@
         };
 
         combo_tilde {
-            bindings = <&kp TILDE>;
+            bindings = <&kp GRAVE>;
             key-positions = <0 12>;
         };
 
