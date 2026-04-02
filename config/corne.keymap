@@ -136,6 +136,16 @@
             bindings = <&kp GLOBE>;
             key-positions = <36 28>;
         };
+
+        combo_del {
+            bindings = <&kp DEL>;
+            key-positions = <5 17>;
+        };
+
+        combo_enter {
+            bindings = <&kp ENTER>;
+            key-positions = <17 29>;
+        };
     };
 
     keymap {
