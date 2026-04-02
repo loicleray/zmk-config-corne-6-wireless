@@ -42,67 +42,56 @@
         combo_exclamation {
             bindings = <&kp EXCLAMATION>;
             key-positions = <0 1>;
-            layers = <1>;
         };
 
         combo_at {
             bindings = <&kp AT>;
             key-positions = <1 2>;
-            layers = <1>;
         };
 
         combo_hash {
             bindings = <&kp HASH>;
             key-positions = <2 3>;
-            layers = <1>;
         };
 
         combo_dollar {
             bindings = <&kp DOLLAR>;
             key-positions = <3 4>;
-            layers = <1>;
         };
 
         combo_percent {
             bindings = <&kp PERCENT>;
             key-positions = <4 5>;
-            layers = <1>;
         };
 
         combo_caret {
             bindings = <&kp CARET>;
             key-positions = <5 6>;
-            layers = <1>;
         };
 
         combo_ampersand {
             bindings = <&kp AMPERSAND>;
             key-positions = <6 7>;
-            layers = <1>;
         };
 
         combo_asterisk {
             bindings = <&kp ASTERISK>;
             key-positions = <7 8>;
-            layers = <1>;
         };
 
         combo_parentheses-left {
             bindings = <&kp LEFT_PARENTHESIS>;
             key-positions = <8 9>;
-            layers = <1>;
         };
 
         combo_parentheses-right {
             bindings = <&kp RIGHT_PARENTHESIS>;
             key-positions = <9 10>;
-            layers = <1>;
         };
 
         combo_minus {
             bindings = <&kp MINUS>;
             key-positions = <10 11>;
-            layers = <1>;
         };
 
         combo_caps-lock {
@@ -113,7 +102,7 @@
         combo_backslash {
             bindings = <&kp BACKSLASH>;
             key-positions = <23 11>;
-            layers = <0>;
+            layers = <1>;
         };
 
         combo_brackets-right {
@@ -137,20 +126,10 @@
             layers = <0>;
         };
 
-        combo_parenthesis-left {
-            bindings = <&kp LEFT_PARENTHESIS>;
-            key-positions = <8 9>;
-        };
-
-        combo_parenthesis-right {
-            bindings = <&kp RIGHT_PARENTHESIS>;
-            key-positions = <9 10>;
-        };
-
         combo_plus_equals {
             bindings = <&kp EQUAL>;
             key-positions = <11 23>;
-            layers = <1>;
+            layers = <0>;
         };
 
         combo_globe {
