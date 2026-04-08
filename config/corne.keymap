@@ -17,8 +17,8 @@
  */
 
 #define ZMK_POINTING_DEFAULT_MOVE_VAL 525
-#define COMBO_TERM 40
-#define COMBO_IDLE 150
+#define COMBO_TERM 25
+#define COMBO_IDLE 200
 
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/bt.h>
