@@ -25,11 +25,8 @@
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/pointing.h>
 
-
-
 &mt {
     tapping-term-ms = <150>;
-    flavor = "tap-preferred";
     retro-tap;
 };
 
@@ -48,6 +45,7 @@
 
     combos {
         compatible = "zmk,combos";
+
         combo_exclamation {
             bindings = <&kp EXCLAMATION>;
             key-positions = <1 0>;
@@ -198,44 +196,45 @@
 
     keymap {
         compatible = "zmk,keymap";
+
         default_layer {
             display-name = "Base";
             bindings = <
-                        &kp ESC    &kp Q  &kp W  &kp E         &kp R             &kp T             &kp Y        &kp U  &kp I      &kp O    &kp P     &kp BSPC
-                        &kp TAB    &kp A  &kp S  &kp D         &kp F             &kp G             &kp H        &kp J  &kp K      &kp L    &kp SEMI  &kp ENTER
-                        &kp LSHFT  &kp Z  &kp X  &kp C         &kp V             &kp B             &kp N        &kp M  &kp COMMA  &kp DOT  &kp FSLH  &kp RIGHT_SHIFT
-                                                &kp LEFT_ALT  &kp LEFT_CONTROL  &mt LGUI SPACE    &lt 1 SPACE  &mo 2  &mo 3
-                    >;
+&kp ESC    &kp Q  &kp W  &kp E         &kp R             &kp T             &kp Y        &kp U  &kp I      &kp O    &kp P     &kp BSPC
+&kp TAB    &kp A  &kp S  &kp D         &kp F             &kp G             &kp H        &kp J  &kp K      &kp L    &kp SEMI  &kp ENTER
+&kp LSHFT  &kp Z  &kp X  &kp C         &kp V             &kp B             &kp N        &kp M  &kp COMMA  &kp DOT  &kp FSLH  &kp RIGHT_SHIFT
+                         &kp LEFT_ALT  &kp LEFT_CONTROL  &mt LGUI SPACE    &lt 1 SPACE  &mo 2  &mo 3
+            >;
         };
 
         lower_layer {
             display-name = "Num&Fn";
             bindings = <
-                        &trans  &kp N1   &kp N2   &kp N3  &kp N4  &kp N5    &kp N6  &kp N7  &kp N8  &kp N9  &kp N0   &kp BSPC
-                        &trans  &kp F1   &kp F2   &kp F3  &kp F4  &kp F5    &kp F6  &kp F7  &kp F8  &kp F9  &kp F10  &trans
-                        &trans  &kp F11  &kp F12  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans   &trans
-                                                &trans  &trans  &trans    &trans  &trans  &trans
-                    >;
+&trans  &kp N1   &kp N2   &kp N3  &kp N4  &kp N5    &kp N6  &kp N7  &kp N8  &kp N9  &kp N0   &kp BSPC
+&trans  &kp F1   &kp F2   &kp F3  &kp F4  &kp F5    &kp F6  &kp F7  &kp F8  &kp F9  &kp F10  &trans
+&trans  &kp F11  &kp F12  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans   &trans
+                          &trans  &trans  &trans    &trans  &trans  &trans
+            >;
         };
 
         raise_layer {
             display-name = "Navigation";
             bindings = <
-                        &trans  &trans  &none           &kp UP_ARROW    &none            &kp C_BRI_UP    &kp C_VOLUME_UP    &msc SCRL_RIGHT  &mmv MOVE_UP    &msc SCRL_LEFT   &msc SCRL_DOWN  &trans
-                        &trans  &none   &kp LEFT_ARROW  &kp DOWN_ARROW  &kp RIGHT_ARROW  &kp C_BRI_DN    &kp C_VOLUME_DOWN  &mmv MOVE_LEFT   &mmv MOVE_DOWN  &mmv MOVE_RIGHT  &msc SCRL_UP    &trans
-                        &trans  &trans  &trans          &trans          &trans           &trans          &none              &mkp MB1         &mkp MB3        &mkp MB2         &none           &trans
-                                                        &trans          &trans           &trans          &trans             &trans           &trans
-                    >;
+&trans  &trans  &none           &kp UP_ARROW    &none            &kp C_BRI_UP    &kp C_VOLUME_UP    &msc SCRL_RIGHT  &mmv MOVE_UP    &msc SCRL_LEFT   &msc SCRL_DOWN  &trans
+&trans  &none   &kp LEFT_ARROW  &kp DOWN_ARROW  &kp RIGHT_ARROW  &kp C_BRI_DN    &kp C_VOLUME_DOWN  &mmv MOVE_LEFT   &mmv MOVE_DOWN  &mmv MOVE_RIGHT  &msc SCRL_UP    &trans
+&trans  &trans  &trans          &trans          &trans           &trans          &none              &mkp MB1         &mkp MB3        &mkp MB2         &none           &trans
+                                &trans          &trans           &trans          &trans             &trans           &trans
+            >;
         };
 
         settings {
             display-name = "Settings";
             bindings = <
-                        &trans      &bt BT_SEL 0  &bt BT_SEL 1    &bt BT_SEL 2      &bt BT_SEL 3  &bt BT_SEL 4    &trans  &msc SCRL_RIGHT  &kp UP_ARROW    &msc SCRL_LEFT   &msc SCRL_DOWN  &bt BT_CLR
-                        &trans      &none         &kp C_PREVIOUS  &kp C_PLAY_PAUSE  &kp C_NEXT    &trans          &trans  &kp LEFT_ARROW   &kp DOWN_ARROW  &kp RIGHT_ARROW  &msc SCRL_UP    &trans
-                        &sys_reset  &trans        &trans          &trans            &trans        &trans          &none   &trans           &trans          &trans           &trans          &trans
-                                                                &trans            &trans        &trans          &trans  &trans           &trans
-                    >;
+&trans      &bt BT_SEL 0  &bt BT_SEL 1    &bt BT_SEL 2      &bt BT_SEL 3  &bt BT_SEL 4    &trans  &msc SCRL_RIGHT  &kp UP_ARROW    &msc SCRL_LEFT   &msc SCRL_DOWN  &bt BT_CLR
+&trans      &none         &kp C_PREVIOUS  &kp C_PLAY_PAUSE  &kp C_NEXT    &trans          &trans  &kp LEFT_ARROW   &kp DOWN_ARROW  &kp RIGHT_ARROW  &msc SCRL_UP    &trans
+&sys_reset  &trans        &trans          &trans            &trans        &trans          &none   &trans           &trans          &trans           &trans          &trans
+                                          &trans            &trans        &trans          &trans  &trans           &trans
+            >;
         };
     };
 };
