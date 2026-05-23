@@ -170,6 +170,16 @@
             bindings = <&kp ENTER>;
             key-positions = <17 29>;
         };
+
+        combo_esc {
+            bindings = <&kp ESC>;
+            key-positions = <6 18>;
+        };
+
+        combo_tab {
+            bindings = <&kp TAB>;
+            key-positions = <30 18>;
+        };
     };
 
     keymap {
