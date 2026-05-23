@@ -7,4 +7,4 @@ A simple Corne Keyboard layout, optimised for:
 - ZMK (nice!nano)
 
 Layout as follows:
-<img width="900" height="1048" alt="my_keymap-5" src="https://github.com/user-attachments/assets/0994cb95-b33d-4037-844f-36a622fcb617" />
+<img width="900" height="1379" alt="my_keymap-5" src="https://github.com/user-attachments/assets/74b5ceb7-2ef0-42bb-9d0a-1c7d47b207ca" />
