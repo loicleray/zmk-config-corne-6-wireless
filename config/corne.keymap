@@ -42,19 +42,20 @@
             bindings = <&kp>, <&kp>;
         };
 
-       td_lshift: tap_dance_lshift {
-    compatible = "zmk,behavior-tap-dance";
-    #binding-cells = <0>;
-    tapping-term-ms = <200>;
-    bindings = <&kp LSHFT>, <&kp CAPS>;
-};
+        td_lshift: tap_dance_lshift {
+            compatible = "zmk,behavior-tap-dance";
+            #binding-cells = <0>;
+            tapping-term-ms = <200>;
+            bindings = <&kp LSHFT>, <&kp CAPS>;
+        };
 
-td_rshift: tap_dance_rshift {
-    compatible = "zmk,behavior-tap-dance";
-    #binding-cells = <0>;
-    tapping-term-ms = <200>;
-    bindings = <&kp RSHFT>, <&kp CAPS>;
-};
+        td_rshift: tap_dance_rshift {
+            compatible = "zmk,behavior-tap-dance";
+            #binding-cells = <0>;
+            tapping-term-ms = <200>;
+            bindings = <&kp RSHFT>, <&kp CAPS>;
+        };
+    };
 
     combos {
         compatible = "zmk,combos";
@@ -136,11 +137,6 @@ td_rshift: tap_dance_rshift {
             require-prior-idle-ms = <COMBO_IDLE>;
         };
 
-        combo_caps-lock {
-            bindings = <&kt CAPSLOCK>;
-            key-positions = <12 24>;
-        };
-
         combo_backslash {
             bindings = <&kp BACKSLASH>;
             key-positions = <23 11>;
@@ -199,7 +195,7 @@ td_rshift: tap_dance_rshift {
             key-positions = <30 18>;
         };
 
-        combo-capsword {
+        combo_capsword {
             bindings = <&caps_word>;
             key-positions = <24 35>;
         };
