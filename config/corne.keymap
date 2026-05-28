@@ -41,12 +41,14 @@
             retro-tap;
             bindings = <&kp>, <&kp>;
         };
+
         td_lshift: tap_dance_lshift {
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
-            tapping-term-ms = <200>;
+            tapping-term-ms = <100>;
             bindings = <&kp LSHFT>, <&kp CAPS>;
         };
+
         td_rshift: tap_dance_rshift {
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
@@ -54,8 +56,6 @@
             bindings = <&kp RSHFT>, <&kp CAPS>;
         };
     };
-
-    
 
     combos {
         compatible = "zmk,combos";
@@ -214,10 +214,10 @@
         default_layer {
             display-name = "Base";
             bindings = <
-&kp ESC    &kp Q  &kp W  &kp E         &kp R             &kp T             &kp Y        &kp U  &kp I      &kp O    &kp P     &kp BSPC
-&kp TAB    &kp A  &kp S  &kp D         &kp F             &kp G             &kp H        &kp J  &kp K      &kp L    &kp SEMI  &kp ENTER
-&kp td_lshift  &kp Z  &kp X  &kp C         &kp V             &kp B             &kp N        &kp M  &kp COMMA  &kp DOT  &kp FSLH  &kp td_rshift
-                         &kp LEFT_ALT  &kp LEFT_CONTROL  &mt LGUI SPACE    &lt 1 SPACE  &mo 2  &mo 3
+&kp ESC     &kp Q  &kp W  &kp E         &kp R             &kp T             &kp Y        &kp U  &kp I      &kp O    &kp P     &kp BSPC
+&kp TAB     &kp A  &kp S  &kp D         &kp F             &kp G             &kp H        &kp J  &kp K      &kp L    &kp SEMI  &kp ENTER
+&td_lshift  &kp Z  &kp X  &kp C         &kp V             &kp B             &kp N        &kp M  &kp COMMA  &kp DOT  &kp FSLH  &td_rshift
+                          &kp LEFT_ALT  &kp LEFT_CONTROL  &mt LGUI SPACE    &lt 1 SPACE  &mo 2  &mo 3
             >;
         };
 
