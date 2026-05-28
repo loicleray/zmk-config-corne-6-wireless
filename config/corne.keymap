@@ -21,7 +21,7 @@
 #define COMBO_IDLE 200
 #define SHIFT_TAP_SPEED 200
 
-#include <behaviors.dtsi>
+#include <behaviors.dtsi> 
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/pointing.h>
@@ -47,15 +47,15 @@
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
             tapping-term-ms = <SHIFT_TAP_SPEED>;
-            bindings = <&kp LSHFT>, <&kp CAPS>;
+            bindings = <&kp LSHFT>, &caps_word, <&kp CAPS> ;
         };
         td_rshift: tap_dance_rshift {
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
             tapping-term-ms = <SHIFT_TAP_SPEED>;
-            bindings = <&kp RSHFT>, <&kp CAPS>;
+            bindings = <&kp RSHFT>, &caps_word,  <&kp CAPS>;
         };
-    };
+    }; 
 
     combos {
         compatible = "zmk,combos";
