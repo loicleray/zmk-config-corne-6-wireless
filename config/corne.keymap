@@ -194,11 +194,7 @@
             key-positions = <30 18>;
         };
 
-        combo_capsword {
-            bindings = <&caps_word>;
-            key-positions = <24 35>; 
-            timeout-ms = <30>;
-        };
+
     };
 
     keymap {
