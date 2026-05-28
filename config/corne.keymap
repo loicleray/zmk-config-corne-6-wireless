@@ -204,13 +204,6 @@
             bindings = <&caps_word>;
             key-positions = <24 35>;
         };
-
-        /*
-        *combo_space {
-         *   bindings = <&kp SPACE>;
-          *  key-positions = <28 29>;
-        *};
-        */
     };
 
     keymap {
