@@ -21,39 +21,32 @@
 #define COMBO_IDLE 200
 #define SHIFT_TAP_SPEED 200
 
-#include <behaviors.dtsi> 
+#include <behaviors.dtsi>
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/pointing.h>
 
-&mt {
-    tapping-term-ms = <50>;
-    retro-tap;
-};
+{
 
-/ {
     behaviors {
-        hm: homerow_mods {
+        cmd_space: cmd_space {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
-            tapping-term-ms = <280>;
-            quick-tap-ms = <200>;
-            flavor = "tap-preferred";
-            retro-tap;
+            flavor = "hold-preferred";
+            tapping-term-ms = <50>;
             bindings = <&kp>, <&kp>;
-            timeout-ms = <50>;
         };
         td_lshift: tap_dance_lshift {
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
             tapping-term-ms = <SHIFT_TAP_SPEED>;
-            bindings = <&kp LSHFT>, &caps_word, <&kp CAPS> ;
+            bindings = <&kp LSHFT>, <&caps_word>, <&kp CAPS>;
         };
         td_rshift: tap_dance_rshift {
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
             tapping-term-ms = <SHIFT_TAP_SPEED>;
-            bindings = <&kp RSHFT>, &caps_word,  <&kp CAPS>;
+            bindings = <&kp LSHFT>, <&caps_word>, <&kp CAPS>;
         };
     }; 
 
@@ -207,7 +200,7 @@
 &kp ESC     &kp Q  &kp W  &kp E         &kp R             &kp T             &kp Y        &kp U  &kp I      &kp O    &kp P     &kp BSPC
 &kp TAB     &kp A  &kp S  &kp D         &kp F             &kp G             &kp H        &kp J  &kp K      &kp L    &kp SEMI  &kp ENTER
 &td_lshift  &kp Z  &kp X  &kp C         &kp V             &kp B             &kp N        &kp M  &kp COMMA  &kp DOT  &kp FSLH  &td_rshift
-                          &kp LEFT_ALT  &kp LEFT_CONTROL  &mt LGUI SPACE    &lt 1 SPACE  &mo 2  &mo 3
+                          &kp LEFT_ALT  &kp LEFT_CONTROL  &cmd_space LGUI SPACE    &lt 1 SPACE  &mo 2  &mo 3
             >;
         };
 
