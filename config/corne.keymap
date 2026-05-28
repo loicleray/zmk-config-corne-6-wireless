@@ -19,6 +19,7 @@
 #define ZMK_POINTING_DEFAULT_MOVE_VAL 575
 #define COMBO_TERM 25
 #define COMBO_IDLE 200
+#define SHIFT_COMBO_IDLE 150
 
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/bt.h>
@@ -41,18 +42,16 @@
             retro-tap;
             bindings = <&kp>, <&kp>;
         };
-
         td_lshift: tap_dance_lshift {
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
-            tapping-term-ms = <250>;
+            tapping-term-ms = <SHIFT_COMBO_IDLE>;
             bindings = <&kp LSHFT>, <&kp CAPS>;
         };
-
         td_rshift: tap_dance_rshift {
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
-            tapping-term-ms = <300>;
+            tapping-term-ms = <SHIFT_COMBO_IDLE>;
             bindings = <&kp RSHFT>, <&kp CAPS>;
         };
     };
@@ -197,7 +196,8 @@
 
         combo_capsword {
             bindings = <&caps_word>;
-            key-positions = <24 35>;
+            key-positions = <24 35>; 
+            timeout-ms = <30>;
         };
     };
 
