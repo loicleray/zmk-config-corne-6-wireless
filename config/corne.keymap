@@ -19,7 +19,7 @@
 #define ZMK_POINTING_DEFAULT_MOVE_VAL 575
 #define COMBO_TERM 25
 #define COMBO_IDLE 200
-#define SHIFT_TAP_SPEED 200 
+#define SHIFT_TAP_SPEED 200
 
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/bt.h>
@@ -41,6 +41,7 @@
             flavor = "tap-preferred";
             retro-tap;
             bindings = <&kp>, <&kp>;
+            timeout-ms = <50>;
         };
         td_lshift: tap_dance_lshift {
             compatible = "zmk,behavior-tap-dance";
