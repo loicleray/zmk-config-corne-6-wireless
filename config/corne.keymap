@@ -41,7 +41,21 @@
             retro-tap;
             bindings = <&kp>, <&kp>;
         };
+        td_lshift: tap_dance_lshift {
+            compatible = "zmk,behavior-tap-dance";
+            #binding-cells = <0>;
+            tapping-term-ms = <200>;
+            bindings = <&kp LSHFT>, <&kp CAPS>;
+        };
+        td_rshift: tap_dance_rshift {
+            compatible = "zmk,behavior-tap-dance";
+            #binding-cells = <0>;
+            tapping-term-ms = <200>;
+            bindings = <&kp RSHFT>, <&kp CAPS>;
+        };
     };
+
+    
 
     combos {
         compatible = "zmk,combos";
@@ -202,7 +216,7 @@
             bindings = <
 &kp ESC    &kp Q  &kp W  &kp E         &kp R             &kp T             &kp Y        &kp U  &kp I      &kp O    &kp P     &kp BSPC
 &kp TAB    &kp A  &kp S  &kp D         &kp F             &kp G             &kp H        &kp J  &kp K      &kp L    &kp SEMI  &kp ENTER
-&kp LSHFT  &kp Z  &kp X  &kp C         &kp V             &kp B             &kp N        &kp M  &kp COMMA  &kp DOT  &kp FSLH  &kp RIGHT_SHIFT
+&kp td_lshift  &kp Z  &kp X  &kp C         &kp V             &kp B             &kp N        &kp M  &kp COMMA  &kp DOT  &kp FSLH  &kp td_rshift
                          &kp LEFT_ALT  &kp LEFT_CONTROL  &mt LGUI SPACE    &lt 1 SPACE  &mo 2  &mo 3
             >;
         };
