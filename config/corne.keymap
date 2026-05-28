@@ -52,7 +52,7 @@
         td_rshift: tap_dance_rshift {
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
-            tapping-term-ms = <200>;
+            tapping-term-ms = <100>;
             bindings = <&kp RSHFT>, <&kp CAPS>;
         };
     };
