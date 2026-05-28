@@ -19,7 +19,7 @@
 #define ZMK_POINTING_DEFAULT_MOVE_VAL 575
 #define COMBO_TERM 25
 #define COMBO_IDLE 200
-#define SHIFT_COMBO_IDLE 150
+#define SHIFT_TAP_SPEED 200 
 
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/bt.h>
@@ -45,13 +45,13 @@
         td_lshift: tap_dance_lshift {
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
-            tapping-term-ms = <SHIFT_COMBO_IDLE>;
+            tapping-term-ms = <SHIFT_TAP_SPEED>;
             bindings = <&kp LSHFT>, <&kp CAPS>;
         };
         td_rshift: tap_dance_rshift {
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
-            tapping-term-ms = <SHIFT_COMBO_IDLE>;
+            tapping-term-ms = <SHIFT_TAP_SPEED>;
             bindings = <&kp RSHFT>, <&kp CAPS>;
         };
     };
