@@ -16,8 +16,8 @@
  * Add mouse emulation, see: https://v0-3-branch.zmk.dev/docs/keymaps/behaviors/mouse-emulation
  */
 
-#define ZMK_POINTING_DEFAULT_MOVE_VAL 650
-#define ZMK_POINTING_DEFAULT_SCROLL_VAL 50
+#define ZMK_POINTING_DEFAULT_MOVE_VAL 725
+#define ZMK_POINTING_DEFAULT_SCROLL_VAL 80
 #define COMBO_TERM 25
 #define COMBO_IDLE 200
 #define SHIFT_TAP_SPEED 200
