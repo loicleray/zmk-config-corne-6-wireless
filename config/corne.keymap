@@ -206,6 +206,13 @@
             bindings = <&kp TAB>;
             key-positions = <30 18>;
         };
+
+        combo_numpad_toggle {
+            bindings = <&tog 4>;
+            key-positions = <15 16 17>;
+            timeout-ms = <COMBO_TERM>;
+            require-prior-idle-ms = <COMBO_IDLE>;
+        };
     };
 
     keymap {
@@ -246,6 +253,15 @@
                         LEFT_ARROW &kp DOWN_ARROW &kp RIGHT_ARROW &msc SCRL_UP &trans &sys_reset
                         &trans &trans &trans &trans &trans &none &trans &trans &trans &trans &trans
                         &trans &trans &trans &trans &trans &trans>;
+        };
+
+        numpad_layer {
+            display-name = "NumPad";
+            bindings = <&trans &kp KP_MULTIPLY &kp N1 &kp N2 &kp N3 &kp PLUS &trans &trans &trans
+                        &trans &trans &trans &trans &trans &kp KP_DIVIDE &kp N4 &kp N5 &kp N6 &kp
+                        MINUS &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans
+                        &kp EQUAL &kp N7 &kp N8 &kp N9 &kp N0 &trans
+                        &trans &trans &trans &trans &trans &trans &trans>;
         };
     };
 };
