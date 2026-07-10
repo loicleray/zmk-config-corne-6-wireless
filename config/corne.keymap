@@ -16,7 +16,7 @@
  * Add mouse emulation, see: https://v0-3-branch.zmk.dev/docs/keymaps/behaviors/mouse-emulation
  */
 
-#define ZMK_POINTING_DEFAULT_MOVE_VAL 725
+#define ZMK_POINTING_DEFAULT_MOVE_VAL 850
 #define ZMK_POINTING_DEFAULT_SCROLL_VAL 160
 #define COMBO_TERM 25
 #define COMBO_IDLE 200
@@ -26,6 +26,23 @@
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/pointing.h>
+
+// MOUSE MOVEMENT & SCROLL CONFIGURATION
+// 1. Mouse movement emulation custom config.
+
+&mmv {
+    acceleration-exponent = <2>;      // quadratic: starts slow, then ramps to max speed as defined in ZMK_POINTING_DEFAULT_MOVE_VAL
+    time-to-max-speed-ms = <300>;     // default is ~300
+    delay-ms = <0>;
+};
+
+// 2. Mouse scroll emulation custom config.
+
+&msc {
+    acceleration-exponent = <1>;      // linear — scroll feels weird with curves
+    time-to-max-speed-ms = <1000>;
+    delay-ms = <0>;
+};
 
 / {
     behaviors {
