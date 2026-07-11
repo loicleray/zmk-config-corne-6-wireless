@@ -17,7 +17,7 @@
  */
 
 #define ZMK_POINTING_DEFAULT_MOVE_VAL 1000
-#define ZMK_POINTING_DEFAULT_SCROLL_VAL 160
+#define ZMK_POINTING_DEFAULT_SCROLL_VAL 200
 #define COMBO_TERM 25
 #define COMBO_IDLE 200
 #define SHIFT_TAP_SPEED 200
@@ -40,7 +40,7 @@
 
 &msc {
     acceleration-exponent = <1>;      // linear — scroll feels weird with curves
-    time-to-max-speed-ms = <300>;
+    time-to-max-speed-ms = <175>;
     delay-ms = <0>;
 };
 
