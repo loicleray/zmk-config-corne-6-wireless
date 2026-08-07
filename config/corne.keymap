@@ -213,6 +213,13 @@
             timeout-ms = <COMBO_TERM>;
             require-prior-idle-ms = <COMBO_IDLE>;
         };
+
+        combo_mirror_toggle {
+            bindings = <&tog 5>;
+            key-positions = <26 27 28>;
+            timeout-ms = <COMBO_TERM>;
+            require-prior-idle-ms = <COMBO_IDLE>;
+        };
     };
 
     keymap {
@@ -265,6 +272,15 @@
 &trans  &kp KP_DIVIDE    &kp N4  &kp N5  &kp N6  &kp MINUS    &trans  &trans  &trans  &trans  &trans  &trans
 &trans  &kp N0           &kp N1  &kp N2  &kp N3  &kp EQUAL    &trans  &trans  &trans  &trans  &trans  &trans
                                  &trans  &trans  &trans       &trans  &mo 2   &mo 3
+            >;
+        };
+
+        mirror {
+            bindings = <
+&trans  &kp P     &kp O    &kp I      &kp U   &kp Y     &kp T   &kp R   &kp E   &kp W  &kp Q  &trans
+&trans  &kp SEMI  &kp L    &kp K      &kp J   &kp H     &kp G   &kp F   &kp D   &kp S  &kp A  &trans
+&trans  &kp FSLH  &kp DOT  &kp COMMA  &kp M   &kp N     &kp B   &kp V   &kp C   &kp X  &kp Z  &trans
+                           &trans     &trans  &trans    &trans  &trans  &trans
             >;
         };
     };
