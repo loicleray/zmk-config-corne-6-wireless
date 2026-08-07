@@ -220,6 +220,13 @@
             timeout-ms = <COMBO_TERM>;
             require-prior-idle-ms = <COMBO_IDLE>;
         };
+
+        combo_mirror_sticky {
+            bindings = <&sl 5>;
+            key-positions = <14 16>;
+            timeout-ms = <COMBO_TERM>;
+            require-prior-idle-ms = <COMBO_IDLE>;
+        };
     };
 
     keymap {
