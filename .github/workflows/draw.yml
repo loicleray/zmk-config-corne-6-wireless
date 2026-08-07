@@ -13,7 +13,7 @@ jobs:
       contents: write
     with:
       draw_args: |
-        corne:'-k crkbd -l LAYOUT_split_3x6_3'
+        corne:'-z corne'
       commit_message: "[Draw] ${{ github.event.head_commit.message }}"
       destination: "commit"
       fail_on_error: ${{ fromJSON(true) }}
