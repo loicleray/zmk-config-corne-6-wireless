@@ -188,7 +188,7 @@ layers:
   - {t: ▽, type: trans}
   - KP DIVIDE
   - '4'
-  - '5'
+  - {t: '5', h: .}
   - '6'
   - '-'
   - {t: ▽, type: trans}
@@ -213,8 +213,8 @@ layers:
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
-  - Navigation
-  - Settings
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
   mirror:
   - {t: ▽, type: trans}
   - P
