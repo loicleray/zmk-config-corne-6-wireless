@@ -175,10 +175,10 @@ layers:
   NumPad:
   - {t: ▽, type: trans}
   - KP MULTIPLY
-  - '7'
-  - '8'
-  - '9'
-  - +
+  - KP 7
+  - {t: KP 8, h: (}
+  - {t: KP 9, h: )}
+  - KP PLUS
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
@@ -187,10 +187,10 @@ layers:
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - KP DIVIDE
-  - '4'
-  - {t: '5', h: .}
-  - '6'
-  - '-'
+  - KP 4
+  - {t: KP 5, h: .}
+  - KP 6
+  - KP SUBTRACT
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
@@ -198,11 +198,11 @@ layers:
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
-  - '0'
-  - '1'
-  - '2'
-  - '3'
-  - '='
+  - KP 0
+  - KP 1
+  - KP 2
+  - KP 3
+  - KP EQUAL
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
