@@ -57,8 +57,9 @@
         mt_numpad: mt_numpad {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
-            flavor = "hold-preferred";
-            tapping-term-ms = <275>;
+            flavor = "tap-preferred";
+            quick-tap-ms = <175>
+            tapping-term-ms = <200>;
             bindings = <&kp>, <&kp>;
         };
 
