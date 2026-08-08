@@ -43,6 +43,49 @@ layers:
   - {t: SPACE, h: Num&Fn}
   - Navigation
   - Settings
+  NumPad:
+  - {t: ▽, type: trans}
+  - KP MULTIPLY
+  - KP 7
+  - {t: KP 8, h: (}
+  - {t: KP 9, h: )}
+  - KP PLUS
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - KP DIVIDE
+  - KP 4
+  - {t: KP 5, h: .}
+  - KP 6
+  - KP SUBTRACT
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - KP 0
+  - KP 1
+  - KP 2
+  - KP 3
+  - KP EQUAL
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
   Num&Fn:
   - {t: ▽, type: trans}
   - '1'
@@ -172,50 +215,7 @@ layers:
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {type: held}
-  NumPad:
-  - {t: ▽, type: trans}
-  - KP MULTIPLY
-  - KP 7
-  - {t: KP 8, h: (}
-  - {t: KP 9, h: )}
-  - KP PLUS
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - KP DIVIDE
-  - KP 4
-  - {t: KP 5, h: .}
-  - KP 6
-  - KP SUBTRACT
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - KP 0
-  - KP 1
-  - KP 2
-  - KP 3
-  - KP EQUAL
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  mirror:
+  Mirror:
   - {t: ▽, type: trans}
   - P
   - O
@@ -230,9 +230,9 @@ layers:
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - ;
-  - {t: L, type: held}
-  - {t: K, type: held}
-  - {t: J, type: held}
+  - L
+  - K
+  - J
   - H
   - G
   - F
@@ -306,9 +306,7 @@ combos:
   k: ESC
 - p: [30, 18]
   k: TAB
-- p: [2, 3, 4]
+- p: [14, 15, 16]
   k: {t: NumPad, h: toggle}
-- p: [26, 27, 28]
-  k: {t: mirror, h: toggle}
-- p: [14, 16, 15]
-  k: {t: mirror, h: sticky}
+- p: [2, 3, 4]
+  k: {t: Mirror, h: toggle}
