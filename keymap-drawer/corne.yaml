@@ -160,7 +160,7 @@ layers:
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
-  - ''
+  - MUTE
   - '&mkp MB1'
   - '&mkp MB3'
   - '&mkp MB2'
