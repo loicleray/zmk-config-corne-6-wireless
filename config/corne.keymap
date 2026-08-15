@@ -1,51 +1,126 @@
 /*
  * Copyright (c) 2020 The ZMK Contributors
- *
  * SPDX-License-Identifier: MIT
- */
-/*
- * Corne 6 - key layout and numbering:
  *
- *      Left Half:                            Right Half:
- *      0   1   2   3   4   5                 6   7   8   9  10  11
- *      12  13  14  15  16  17                18  19  20  21  22  23
- *      24  25  26  27  28  29                30  31  32  33  34  35
- *                     36  37  38           39  40  41
- */
-/*
- * Add mouse emulation, see: https://v0-3-branch.zmk.dev/docs/keymaps/behaviors/mouse-emulation
+ * Corne 6 — key positions (used by combos below):
+ *
+ *      Left Half:                    Right Half:
+ *      0   1   2   3   4   5         6   7   8   9  10  11
+ *     12  13  14  15  16  17        18  19  20  21  22  23
+ *     24  25  26  27  28  29        30  31  32  33  34  35
+ *                 36  37  38        39  40  41
+ *
+ * Mouse emulation reference:
+ *   https://v0-3-branch.zmk.dev/docs/keymaps/behaviors/mouse-emulation
  */
 
-#define ZMK_POINTING_DEFAULT_MOVE_VAL 975
+
+/* ============================================================
+ *  USER CONFIG  (tunable constants)
+ * ============================================================ */
+
+#define ZMK_POINTING_DEFAULT_MOVE_VAL   975
 #define ZMK_POINTING_DEFAULT_SCROLL_VAL 200
-#define COMBO_TERM 25
-#define COMBO_IDLE 200
-#define SHIFT_TAP_SPEED 200
+#define COMBO_TERM        25   // max ms between the two keys of a combo
+#define COMBO_IDLE       200   // ms of idle required before a combo can fire
+#define SHIFT_TAP_SPEED  200   // tap-dance window for the shift keys
+
+
+/* ============================================================
+ *  INCLUDES   (helper.h MUST come last, after behaviors.dtsi)
+ * ============================================================ */
 
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/pointing.h>
+#include <dt-bindings/zmk/modifiers.h>   // MOD_* bit macros
+#include "zmk-helpers/helper.h"          // ZMK_MOD_MORPH etc.
 
-// MOUSE MOVEMENT & SCROLL CONFIGURATION
-// 1. Mouse movement emulation custom config.
 
-&mmv {
-    acceleration-exponent = <1>;      // quadratic: starts slow, then ramps to max speed as defined in ZMK_POINTING_DEFAULT_MOVE_VAL
-    time-to-max-speed-ms = <350>;     // default is ~300
-    delay-ms = <0>;
-};
+/* ============================================================
+ *  MIRROR-KEY SYSTEM
+ * ------------------------------------------------------------
+ *  Left-hand keys behave normally when tapped, but while any
+ *  Ctrl / Alt / GUI modifier is held they morph into their
+ *  right-hand QWERTY mirror — so right-hand shortcuts can be
+ *  pressed one-handed with the left hand.
+ *
+ *    tap            -> the letter itself   (e.g. Q)
+ *    mod + tap      -> mod + letter         (e.g. Cmd+Q)
+ *    mod + hold     -> mod + mirror letter  (e.g. Cmd+P)
+ *
+ *  Unmodified typing is untouched: no timing, full key-repeat.
+ * ============================================================ */
 
-// 2. Mouse scroll emulation custom config.
-
-&msc {
-    acceleration-exponent = <1>;      // linear — scroll feels weird with curves
-    time-to-max-speed-ms = <175>;
-    delay-ms = <0>;
-};
-
+/* Dependency: the hold-tap the morph fires while a modifier is held.
+ * Plain node (#binding-cells is fine here — not inside a #define). */
 / {
     behaviors {
+        cmd_ht: cmd_hold_tap {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <200>;
+            bindings = <&kp>, <&kp>;
+        };
+    };
+};
+
+/* Generates one mod-morph node named <TAPKEY>_morph.
+ * ZMK_MOD_MORPH emits its own root node, so calls live at top level. */
+#define MORPH_MIRROR_KEY(tapkey, morphkey)                                     \
+    ZMK_MOD_MORPH(tapkey##_morph,                                              \
+        bindings = <&kp tapkey>, <&cmd_ht morphkey tapkey>;                    \
+        mods      = <(MOD_LCTL|MOD_RCTL|MOD_LALT|MOD_RALT|MOD_LGUI|MOD_RGUI)>; \
+        keep-mods = <(MOD_LCTL|MOD_RCTL|MOD_LALT|MOD_RALT|MOD_LGUI|MOD_RGUI)>; \
+    )
+
+/*                 tap  mirror   */
+MORPH_MIRROR_KEY(  Q,   P     )
+MORPH_MIRROR_KEY(  W,   O     )
+MORPH_MIRROR_KEY(  E,   I     )
+MORPH_MIRROR_KEY(  R,   U     )
+MORPH_MIRROR_KEY(  T,   Y     )
+MORPH_MIRROR_KEY(  A,   SEMI  )
+MORPH_MIRROR_KEY(  S,   L     )
+MORPH_MIRROR_KEY(  D,   K     )
+MORPH_MIRROR_KEY(  F,   J     )
+MORPH_MIRROR_KEY(  G,   H     )
+MORPH_MIRROR_KEY(  Z,   FSLH  )
+MORPH_MIRROR_KEY(  X,   DOT   )
+MORPH_MIRROR_KEY(  C,   COMMA )
+MORPH_MIRROR_KEY(  V,   M     )
+MORPH_MIRROR_KEY(  B,   N     )
+
+
+/* ============================================================
+ *  POINTER TUNING  (override existing mouse move / scroll nodes)
+ * ============================================================ */
+
+&mmv {
+    acceleration-exponent = <1>;   // 1 = linear ramp (0 = uniform, 2 = quadratic)
+    time-to-max-speed-ms  = <350>; // default ~300
+    delay-ms              = <0>;
+};
+
+&msc {
+    acceleration-exponent = <1>;   // linear — scroll feels odd with curves
+    time-to-max-speed-ms  = <175>;
+    delay-ms              = <0>;
+};
+
+
+/* ============================================================
+ *  MAIN NODE  (behaviors, combos, keymap)
+ * ============================================================ */
+
+/ {
+    /* -------------------------------------------------------- */
+    /*  BEHAVIORS                                               */
+    /* -------------------------------------------------------- */
+    behaviors {
+        /* Hold = LGUI, tap = SPACE. Snappy hold (short term). */
         cmd_space: cmd_space {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
@@ -54,6 +129,7 @@
             bindings = <&kp>, <&kp>;
         };
 
+        /* Numpad helpers: hold for a bracket/period, tap for a digit. */
         mt_numpad: mt_numpad {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
@@ -63,6 +139,7 @@
             bindings = <&kp>, <&kp>;
         };
 
+        /* Shift keys: tap = shift, double-tap = caps-word, triple = caps-lock. */
         td_lshift: tap_dance_lshift {
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
@@ -74,229 +151,131 @@
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
             tapping-term-ms = <SHIFT_TAP_SPEED>;
-            bindings = <&kp LSHFT>, <&caps_word>, <&kp CAPS>;
+            bindings = <&kp RSHFT>, <&caps_word>, <&kp CAPS>;   // was LSHFT — fixed
         };
     };
 
+    /* -------------------------------------------------------- */
+    /*  COMBOS                                                  */
+    /* -------------------------------------------------------- */
     combos {
         compatible = "zmk,combos";
 
-        combo_exclamation {
-            bindings = <&kp EXCLAMATION>;
-            key-positions = <1 0>;
-            timeout-ms = <COMBO_TERM>;
-            require-prior-idle-ms = <COMBO_IDLE>;
-        };
+        /* --- Top-row symbols (adjacent number-row pairs) --- */
+        combo_exclamation { bindings = <&kp EXCLAMATION>;       key-positions = <1 0>;   timeout-ms = <COMBO_TERM>; require-prior-idle-ms = <COMBO_IDLE>; };
+        combo_at          { bindings = <&kp AT>;                key-positions = <2 1>;   timeout-ms = <COMBO_TERM>; require-prior-idle-ms = <COMBO_IDLE>; };
+        combo_hash        { bindings = <&kp HASH>;              key-positions = <3 2>;   timeout-ms = <COMBO_TERM>; require-prior-idle-ms = <COMBO_IDLE>; };
+        combo_dollar      { bindings = <&kp DOLLAR>;            key-positions = <4 3>;   timeout-ms = <COMBO_TERM>; require-prior-idle-ms = <COMBO_IDLE>; };
+        combo_percent     { bindings = <&kp PERCENT>;           key-positions = <5 4>;   timeout-ms = <COMBO_TERM>; require-prior-idle-ms = <COMBO_IDLE>; };
+        combo_caret       { bindings = <&kp CARET>;             key-positions = <6 5>;   timeout-ms = <COMBO_TERM>; require-prior-idle-ms = <COMBO_IDLE>; };
+        combo_ampersand   { bindings = <&kp AMPERSAND>;         key-positions = <7 6>;   timeout-ms = <COMBO_TERM>; require-prior-idle-ms = <COMBO_IDLE>; };
+        combo_asterisk    { bindings = <&kp ASTERISK>;          key-positions = <8 7>;   timeout-ms = <COMBO_TERM>; require-prior-idle-ms = <COMBO_IDLE>; };
 
-        combo_at {
-            bindings = <&kp AT>;
-            key-positions = <2 1>;
-            timeout-ms = <COMBO_TERM>;
-            require-prior-idle-ms = <COMBO_IDLE>;
-        };
+        /* --- Parentheses / minus --- */
+        combo_parentheses-left  { bindings = <&kp LEFT_PARENTHESIS>;  key-positions = <8 9>;   timeout-ms = <COMBO_TERM>; require-prior-idle-ms = <COMBO_IDLE>; };
+        combo_parentheses-right { bindings = <&kp RIGHT_PARENTHESIS>; key-positions = <9 10>;  timeout-ms = <COMBO_TERM>; require-prior-idle-ms = <COMBO_IDLE>; };
+        combo_minus             { bindings = <&kp MINUS>;             key-positions = <10 11>; timeout-ms = <COMBO_TERM>; require-prior-idle-ms = <COMBO_IDLE>; };
 
-        combo_hash {
-            bindings = <&kp HASH>;
-            key-positions = <3 2>;
-            timeout-ms = <COMBO_TERM>;
-            require-prior-idle-ms = <COMBO_IDLE>;
-        };
+        /* --- Brackets / backslash --- */
+        combo_backslash      { bindings = <&kp BACKSLASH>;     key-positions = <23 11>; layers = <2>; };
+        combo_brackets-right { bindings = <&kp RIGHT_BRACKET>; key-positions = <21 22>; };
+        combo_brackets-left  { bindings = <&kp LEFT_BRACKET>;  key-positions = <20 21>; };
 
-        combo_dollar {
-            bindings = <&kp DOLLAR>;
-            key-positions = <4 3>;
-            timeout-ms = <COMBO_TERM>;
-            require-prior-idle-ms = <COMBO_IDLE>;
-        };
+        /* --- Quotes / grave / equals --- */
+        combo_tilde       { bindings = <&kp GRAVE>;        key-positions = <0 12>;  };
+        combo_quotes      { bindings = <&kp SINGLE_QUOTE>; key-positions = <23 22>; layers = <0>; };
+        combo_plus_equals { bindings = <&kp EQUAL>;        key-positions = <11 23>; layers = <0>; };
 
-        combo_percent {
-            bindings = <&kp PERCENT>;
-            key-positions = <5 4>;
-            timeout-ms = <COMBO_TERM>;
-            require-prior-idle-ms = <COMBO_IDLE>;
-        };
+        /* --- Utility keys --- */
+        combo_globe { bindings = <&kp GLOBE>;     key-positions = <36 28>; };
+        combo_del   { bindings = <&kp BACKSPACE>; key-positions = <5 17>;  };
+        combo_enter { bindings = <&kp ENTER>;     key-positions = <17 29>; };
+        combo_esc   { bindings = <&kp ESC>;       key-positions = <6 18>;  };
+        combo_tab   { bindings = <&kp TAB>;       key-positions = <30 18>; };
 
-        combo_caret {
-            bindings = <&kp CARET>;
-            key-positions = <6 5>;
-            timeout-ms = <COMBO_TERM>;
-            require-prior-idle-ms = <COMBO_IDLE>;
-        };
-
-        combo_ampersand {
-            bindings = <&kp AMPERSAND>;
-            key-positions = <7 6>;
-            timeout-ms = <COMBO_TERM>;
-            require-prior-idle-ms = <COMBO_IDLE>;
-        };
-
-        combo_asterisk {
-            bindings = <&kp ASTERISK>;
-            key-positions = <8 7>;
-            timeout-ms = <COMBO_TERM>;
-            require-prior-idle-ms = <COMBO_IDLE>;
-        };
-
-        combo_parentheses-left {
-            bindings = <&kp LEFT_PARENTHESIS>;
-            key-positions = <8 9>;
-            timeout-ms = <COMBO_TERM>;
-            require-prior-idle-ms = <COMBO_IDLE>;
-        };
-
-        combo_parentheses-right {
-            bindings = <&kp RIGHT_PARENTHESIS>;
-            key-positions = <9 10>;
-            timeout-ms = <COMBO_TERM>;
-            require-prior-idle-ms = <COMBO_IDLE>;
-        };
-
-        combo_minus {
-            bindings = <&kp MINUS>;
-            key-positions = <10 11>;
-            timeout-ms = <COMBO_TERM>;
-            require-prior-idle-ms = <COMBO_IDLE>;
-        };
-
-        combo_backslash {
-            bindings = <&kp BACKSLASH>;
-            key-positions = <23 11>;
-            layers = <2>;
-        };
-
-        combo_brackets-right {
-            bindings = <&kp RIGHT_BRACKET>;
-            key-positions = <21 22>;
-        };
-
-        combo_brackets-left {
-            bindings = <&kp LEFT_BRACKET>;
-            key-positions = <20 21>;
-        };
-
-        combo_tilde {
-            bindings = <&kp GRAVE>;
-            key-positions = <0 12>;
-        };
-
-        combo_quotes {
-            bindings = <&kp SINGLE_QUOTE>;
-            key-positions = <23 22>;
-            layers = <0>;
-        };
-
-        combo_plus_equals {
-            bindings = <&kp EQUAL>;
-            key-positions = <11 23>;
-            layers = <0>;
-        };
-
-        combo_globe {
-            bindings = <&kp GLOBE>;
-            key-positions = <36 28>;
-        };
-
-        combo_del {
-            bindings = <&kp BACKSPACE>;
-            key-positions = <5 17>;
-        };
-
-        combo_enter {
-            bindings = <&kp ENTER>;
-            key-positions = <17 29>;
-        };
-
-        combo_esc {
-            bindings = <&kp ESC>;
-            key-positions = <6 18>;
-        };
-
-        combo_tab {
-            bindings = <&kp TAB>;
-            key-positions = <30 18>;
-        };
-
-        combo_numpad_toggle {
-            bindings = <&tog 1>;
-            key-positions = <14 15 16>;
-            timeout-ms = <COMBO_TERM>;
-            require-prior-idle-ms = <COMBO_IDLE>;
-        };
-
-        combo_mirror_toggle {
-            bindings = <&tog 5>;
-            key-positions = <2 3 4>;
-            timeout-ms = <COMBO_TERM>;
-            require-prior-idle-ms = <COMBO_IDLE>;
-        };
+        /* --- Layer toggles --- */
+        combo_numpad_toggle { bindings = <&tog 1>; key-positions = <14 15 16>; timeout-ms = <COMBO_TERM>; require-prior-idle-ms = <COMBO_IDLE>; };
+        combo_mirror_toggle { bindings = <&tog 5>; key-positions = <2 3 4>;    timeout-ms = <COMBO_TERM>; require-prior-idle-ms = <COMBO_IDLE>; };
     };
 
+    /* -------------------------------------------------------- */
+    /*  KEYMAP                                                  */
+    /*  Layers: 0 Base · 1 NumPad · 2 Num&Fn · 3 Nav ·          */
+    /*          4 Settings · 5 Mirror                           */
+    /* -------------------------------------------------------- */
     keymap {
         compatible = "zmk,keymap";
 
+        /* --- Layer 0: Base (left hand uses the mirror morphs) --- */
         base_layer {
             display-name = "Base";
-            bindings = <&kp ESC &kp Q &kp W &kp E &kp R &kp T &kp Y &kp U &kp I &kp O &kp P &kp BSPC
-                        &kp TAB &kp A &kp S &kp D &kp F &kp G &kp H &kp J &kp K &kp L &kp SEMI &kp
-                        ENTER &td_lshift &kp Z &kp X &kp C &kp V &kp B &kp N &kp M &kp COMMA &kp DOT
-                        &kp FSLH &td_rshift &kp LEFT_CONTROL &kp LEFT_ALT &cmd_space LGUI SPACE &lt
-                        2 SPACE &mo 3 &mo 4>;
-
             label = "Base";
+            bindings = <
+                &kp ESC    &Q_morph &W_morph &E_morph &R_morph &T_morph   &kp Y &kp U &kp I     &kp O   &kp P    &kp BSPC
+                &kp TAB    &A_morph &S_morph &D_morph &F_morph &G_morph   &kp H &kp J &kp K     &kp L   &kp SEMI &kp ENTER
+                &td_lshift &Z_morph &X_morph &C_morph &V_morph &B_morph   &kp N &kp M &kp COMMA &kp DOT &kp FSLH &td_rshift
+                                        &kp LEFT_CONTROL &kp LEFT_ALT &cmd_space LGUI SPACE   &lt 2 SPACE &mo 3 &mo 4
+            >;
         };
 
+        /* --- Layer 1: NumPad --- */
         numpad_layer {
             display-name = "NumPad";
-            bindings = <&trans &kp KP_MULTIPLY &kp KP_NUMBER_7 &mt_numpad LEFT_PARENTHESIS
-                        KP_NUMBER_8 &mt_numpad RIGHT_PARENTHESIS KP_NUMBER_9 &kp KP_PLUS &trans
-                        &trans &trans &trans &trans &trans &trans &kp KP_DIVIDE &kp KP_NUMBER_4
-                        &mt_numpad PERIOD KP_NUMBER_5 &kp KP_NUMBER_6 &kp KP_SUBTRACT &trans &trans
-                        &trans &trans &trans &trans &trans &kp KP_NUMBER_0 &kp KP_NUMBER_1 &kp
-                        KP_NUMBER_2 &kp KP_NUMBER_3 &kp KP_EQUAL &trans &trans &trans &trans &trans
-                        &trans &trans &trans &trans &trans &trans &trans>;
+            label = "NumPad";
+            bindings = <
+                &trans &kp KP_MULTIPLY &kp KP_NUMBER_7 &mt_numpad LEFT_PARENTHESIS KP_NUMBER_8 &mt_numpad RIGHT_PARENTHESIS KP_NUMBER_9 &kp KP_PLUS     &trans &trans &trans &trans
+                &trans &trans          &kp KP_DIVIDE   &kp KP_NUMBER_4 &mt_numpad PERIOD KP_NUMBER_5 &kp KP_NUMBER_6 &kp KP_SUBTRACT &trans             &trans &trans &trans
+                &trans &trans          &kp KP_NUMBER_0 &kp KP_NUMBER_1 &kp KP_NUMBER_2 &kp KP_NUMBER_3 &kp KP_EQUAL   &trans &trans &trans              &trans &trans
+                                        &trans &trans &trans   &trans &trans &trans
+            >;
         };
 
+        /* --- Layer 2: Numbers & Function row --- */
         num_fn_layer {
             display-name = "Num&Fn";
-            bindings = <&trans &kp N1 &kp N2 &kp N3 &kp N4 &kp N5 &kp N6 &kp N7 &kp N8 &kp N9 &kp N0
-                        &kp BSPC &trans &kp F1 &kp F2 &kp F3 &kp F4 &kp F5 &kp F6 &kp F7 &kp F8 &kp
-                        F9 &kp F10 &trans &trans &kp F11 &kp F12 &trans &trans &trans &trans &trans
-                        &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans>;
-
             label = "Num&Fn";
+            bindings = <
+                &trans &kp N1  &kp N2  &kp N3 &kp N4 &kp N5   &kp N6 &kp N7 &kp N8 &kp N9 &kp N0 &kp BSPC
+                &trans &kp F1  &kp F2  &kp F3 &kp F4 &kp F5   &kp F6 &kp F7 &kp F8 &kp F9 &kp F10 &trans
+                &trans &kp F11 &kp F12 &trans &trans &trans   &trans &trans &trans &trans &trans  &trans
+                                        &trans &trans &trans   &trans &trans &trans
+            >;
         };
 
+        /* --- Layer 3: Navigation & mouse --- */
         nav_layer {
             display-name = "Navigation";
-            bindings = <&trans &trans &none &kp UP_ARROW &none &kp C_BRI_UP &kp C_VOLUME_UP &msc
-                        SCRL_RIGHT &mmv MOVE_UP &msc SCRL_LEFT &msc SCRL_DOWN &trans &trans &none
-                        &kp LEFT_ARROW &kp DOWN_ARROW &kp RIGHT_ARROW &kp C_BRI_DN &kp C_VOLUME_DOWN
-                        &mmv MOVE_LEFT &mmv MOVE_DOWN &mmv MOVE_RIGHT &msc SCRL_UP &trans &trans
-                        &trans &trans &trans &trans &trans &kp C_MUTE &mkp MB1 &mkp MB3 &mkp MB2
-                        &none &trans &trans &trans &trans &trans &trans &trans>;
-
             label = "Navigation";
+            bindings = <
+                &trans &trans &none         &kp UP_ARROW   &none          &kp C_BRI_UP     &kp C_VOLUME_UP &msc SCRL_RIGHT &mmv MOVE_UP   &msc SCRL_LEFT &msc SCRL_DOWN &trans
+                &trans &trans &none         &kp LEFT_ARROW &kp DOWN_ARROW &kp RIGHT_ARROW  &kp C_BRI_DN    &kp C_VOLUME_DOWN &mmv MOVE_LEFT &mmv MOVE_DOWN &mmv MOVE_RIGHT &msc SCRL_UP
+                &trans &trans &trans        &trans         &trans         &trans           &kp C_MUTE      &mkp MB1        &mkp MB3       &mkp MB2       &none          &trans
+                                        &trans &trans &trans   &trans &trans &trans
+            >;
         };
 
+        /* --- Layer 4: Settings (bluetooth, media, reset) --- */
         settings_layer {
             display-name = "Settings";
-            bindings = <&trans &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4
-                        &trans &msc SCRL_RIGHT &kp UP_ARROW &msc SCRL_LEFT &msc SCRL_DOWN &bt BT_CLR
-                        &trans &none &kp C_PREVIOUS &kp C_PLAY_PAUSE &kp C_NEXT &trans &trans &kp
-                        LEFT_ARROW &kp DOWN_ARROW &kp RIGHT_ARROW &msc SCRL_UP &trans &sys_reset
-                        &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans
-                        &sys_reset &trans &trans &trans &trans &trans &trans>;
-
             label = "Settings";
+            bindings = <
+                &trans &bt BT_SEL 0 &bt BT_SEL 1  &bt BT_SEL 2   &bt BT_SEL 3 &bt BT_SEL 4   &trans &msc SCRL_RIGHT &kp UP_ARROW   &msc SCRL_LEFT &msc SCRL_DOWN &bt BT_CLR
+                &trans &none        &kp C_PREVIOUS &kp C_PLAY_PAUSE &kp C_NEXT &trans         &trans &kp LEFT_ARROW  &kp DOWN_ARROW &kp RIGHT_ARROW &msc SCRL_UP  &trans
+                &sys_reset &trans   &trans         &trans         &trans       &trans         &trans &trans          &trans         &trans         &sys_reset     &trans
+                                        &trans &trans &trans   &trans &trans &trans
+            >;
         };
 
+        /* --- Layer 5: Mirror (full one-handed mirrored typing) --- */
         mirror_layer {
-            bindings = <&trans &kp P &kp O &kp I &kp U &kp Y &kp T &kp R &kp E &kp W &kp Q &trans
-                        &trans &kp SEMI &kp L &kp K &kp J &kp H &kp G &kp F &kp D &kp S &kp A &trans
-                        &trans &kp FSLH &kp DOT &kp COMMA &kp M &kp N &kp B &kp V &kp C &kp X &kp Z
-                        &trans &trans &trans &trans &trans &trans &trans>;
-
+            display-name = "Mirror";
             label = "Mirror";
+            bindings = <
+                &trans &kp P    &kp O   &kp I     &kp U &kp Y   &kp T &kp R &kp E &kp W &kp Q &trans
+                &trans &kp SEMI &kp L   &kp K     &kp J &kp H   &kp G &kp F &kp D &kp S &kp A &trans
+                &trans &kp FSLH &kp DOT &kp COMMA &kp M &kp N   &kp B &kp V &kp C &kp X &kp Z &trans
+                                        &trans &trans &trans   &trans &trans &trans
+            >;
         };
     };
 };
