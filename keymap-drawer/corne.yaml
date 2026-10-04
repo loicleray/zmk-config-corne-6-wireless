@@ -2,11 +2,11 @@ layout: {zmk_keyboard: corne}
 layers:
   Base:
   - ESC
-  - Q
-  - W
-  - E
-  - R
-  - T
+  - '&Q_morph'
+  - '&W_morph'
+  - '&E_morph'
+  - '&R_morph'
+  - '&T_morph'
   - Y
   - U
   - I
@@ -14,11 +14,11 @@ layers:
   - P
   - BSPC
   - TAB
-  - A
-  - S
-  - D
-  - F
-  - G
+  - '&A_morph'
+  - '&S_morph'
+  - '&D_morph'
+  - '&F_morph'
+  - '&G_morph'
   - H
   - J
   - K
@@ -26,19 +26,19 @@ layers:
   - ;
   - ENTER
   - '&td_lshift'
-  - Z
-  - X
-  - C
-  - V
-  - B
+  - '&Z_morph'
+  - '&X_morph'
+  - '&C_morph'
+  - '&V_morph'
+  - '&B_morph'
   - N
   - M
   - ','
   - .
   - /
   - '&td_rshift'
-  - LEFT CONTROL
-  - LEFT ALT
+  - LCTRL
+  - LALT
   - {t: SPACE, h: LGUI}
   - {t: SPACE, h: Num&Fn}
   - Navigation
@@ -132,23 +132,23 @@ layers:
   Navigation:
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
-  - ''
-  - UP ARROW
-  - ''
+  - {t: ▽, type: trans}
+  - UP
+  - {t: ▽, type: trans}
   - BRI UP
-  - VOLUME UP
+  - VOL UP
   - '&msc SCRL_RIGHT'
   - '&mmv MOVE_UP'
   - '&msc SCRL_LEFT'
   - '&msc SCRL_DOWN'
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
-  - ''
-  - LEFT ARROW
-  - DOWN ARROW
-  - RIGHT ARROW
+  - {t: ▽, type: trans}
+  - LEFT
+  - DOWN
+  - RIGHT
   - BRI DN
-  - VOLUME DOWN
+  - VOL DN
   - '&mmv MOVE_LEFT'
   - '&mmv MOVE_DOWN'
   - '&mmv MOVE_RIGHT'
@@ -164,7 +164,7 @@ layers:
   - '&mkp MB1'
   - '&mkp MB3'
   - '&mkp MB2'
-  - ''
+  - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
@@ -181,20 +181,20 @@ layers:
   - {t: BT, h: '4'}
   - {t: ▽, type: trans}
   - '&msc SCRL_RIGHT'
-  - UP ARROW
+  - UP
   - '&msc SCRL_LEFT'
   - '&msc SCRL_DOWN'
   - BT CLR
   - {t: ▽, type: trans}
   - ''
-  - PREVIOUS
-  - PLAY PAUSE
+  - PREV
+  - PP
   - NEXT
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
-  - LEFT ARROW
-  - DOWN ARROW
-  - RIGHT ARROW
+  - LEFT
+  - DOWN
+  - RIGHT
   - '&msc SCRL_UP'
   - {t: ▽, type: trans}
   - '&sys_reset'
@@ -207,8 +207,8 @@ layers:
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
   - '&sys_reset'
+  - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
