@@ -220,6 +220,7 @@ MORPH_MIRROR_KEY(  B,   N     )
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
             tapping-term-ms = <SHIFT_TAP_SPEED>;
+            flavor = "hold-preferred";
             bindings = <&kp LSHFT>, <&caps_word>, <&kp CAPS>;
         };
 
@@ -227,6 +228,7 @@ MORPH_MIRROR_KEY(  B,   N     )
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
             tapping-term-ms = <SHIFT_TAP_SPEED>;
+            flavor = "hold-preferred";
             bindings = <&kp RSHFT>, <&caps_word>, <&kp CAPS>;
         };
     };
