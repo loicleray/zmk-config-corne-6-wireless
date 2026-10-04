@@ -248,6 +248,7 @@ MORPH_MIRROR_KEY(  B,   N     )
             key-positions = <1 0>;          // Q + ESC
             timeout-ms = <COMBO_TERM>;
             require-prior-idle-ms = <COMBO_IDLE>;
+            layers = <0>;
         };
 
         combo_at {
@@ -255,6 +256,7 @@ MORPH_MIRROR_KEY(  B,   N     )
             key-positions = <2 1>;          // W + Q
             timeout-ms = <COMBO_TERM>;
             require-prior-idle-ms = <COMBO_IDLE>;
+            layers = <0>;
         };
 
         combo_hash {
@@ -262,6 +264,7 @@ MORPH_MIRROR_KEY(  B,   N     )
             key-positions = <3 2>;          // E + W
             timeout-ms = <COMBO_TERM>;
             require-prior-idle-ms = <COMBO_IDLE>;
+            layers = <0>;
         };
 
         combo_dollar {
@@ -269,6 +272,7 @@ MORPH_MIRROR_KEY(  B,   N     )
             key-positions = <4 3>;          // R + E
             timeout-ms = <COMBO_TERM>;
             require-prior-idle-ms = <COMBO_IDLE>;
+            layers = <0>;
         };
 
         combo_percent {
@@ -276,6 +280,7 @@ MORPH_MIRROR_KEY(  B,   N     )
             key-positions = <5 4>;          // T + R
             timeout-ms = <COMBO_TERM>;
             require-prior-idle-ms = <COMBO_IDLE>;
+            layers = <0>;
         };
 
         combo_caret {
@@ -283,6 +288,7 @@ MORPH_MIRROR_KEY(  B,   N     )
             key-positions = <6 5>;          // Y + T
             timeout-ms = <COMBO_TERM>;
             require-prior-idle-ms = <COMBO_IDLE>;
+            layers = <0>;
         };
 
         combo_ampersand {
@@ -290,6 +296,7 @@ MORPH_MIRROR_KEY(  B,   N     )
             key-positions = <7 6>;          // U + Y
             timeout-ms = <COMBO_TERM>;
             require-prior-idle-ms = <COMBO_IDLE>;
+            layers = <0>;
         };
 
         combo_asterisk {
@@ -297,6 +304,7 @@ MORPH_MIRROR_KEY(  B,   N     )
             key-positions = <8 7>;          // I + U
             timeout-ms = <COMBO_TERM>;
             require-prior-idle-ms = <COMBO_IDLE>;
+            layers = <0>;
         };
 
         combo_parentheses-left {
@@ -304,6 +312,7 @@ MORPH_MIRROR_KEY(  B,   N     )
             key-positions = <8 9>;          // I + O
             timeout-ms = <COMBO_TERM>;
             require-prior-idle-ms = <COMBO_IDLE>;
+            layers = <0>;
         };
 
         combo_parentheses-right {
@@ -311,6 +320,7 @@ MORPH_MIRROR_KEY(  B,   N     )
             key-positions = <9 10>;         // O + P
             timeout-ms = <COMBO_TERM>;
             require-prior-idle-ms = <COMBO_IDLE>;
+            layers = <0>;
         };
 
         combo_minus {
@@ -318,6 +328,7 @@ MORPH_MIRROR_KEY(  B,   N     )
             key-positions = <10 11>;        // P + BSPC
             timeout-ms = <COMBO_TERM>;
             require-prior-idle-ms = <COMBO_IDLE>;
+            layers = <0>;
         };
 
         /* --- Brackets / backslash --- */
@@ -330,17 +341,20 @@ MORPH_MIRROR_KEY(  B,   N     )
         combo_brackets-right {
             bindings = <&kp RIGHT_BRACKET>;
             key-positions = <21 22>;        // L + ;
+            layers = <0>;
         };
 
         combo_brackets-left {
             bindings = <&kp LEFT_BRACKET>;
             key-positions = <20 21>;        // K + L
+            layers = <0>;
         };
 
         /* --- Quotes / grave / equals --- */
         combo_tilde {
             bindings = <&kp GRAVE>;
             key-positions = <0 12>;         // ESC + TAB  (` and, with Shift, ~)
+            layers = <0>;
         };
 
         combo_quotes {
@@ -387,6 +401,7 @@ MORPH_MIRROR_KEY(  B,   N     )
             key-positions = <14 15 16>;     // S + D + F
             timeout-ms = <COMBO_TERM>;
             require-prior-idle-ms = <COMBO_IDLE>;
+            layers = <0>, <3>, <5>;
         };
 
         combo_mirror_toggle {
@@ -394,6 +409,7 @@ MORPH_MIRROR_KEY(  B,   N     )
             key-positions = <2 3 4>;        // W + E + R
             timeout-ms = <COMBO_TERM>;
             require-prior-idle-ms = <COMBO_IDLE>;
+            layers = <0>, <3>, <5>;
         };
     };
 
