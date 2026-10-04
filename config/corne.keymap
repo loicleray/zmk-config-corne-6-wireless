@@ -35,6 +35,7 @@
 #define COMBO_TERM        25   // max ms between the keys of a combo
 #define COMBO_IDLE       200   // ms of idle required before a combo can fire
 #define SHIFT_TAP_SPEED  250   // tap-dance window for the shift keys
+#define SHIFT_HOLD_TERM  200   // ms the 2nd press must be held to become caps-lock
 
 #define MIRROR_TD_TERM   200   // max ms from first press to second press;
 // also how long a lone tap waits before it is sent
@@ -110,9 +111,30 @@
             tapping-term-ms = <MIRROR_HOLD_TERM>;
             bindings = <&kp>, <&mirror_dbl>;
         };
+
+        /* Second press of a shift double-tap: hold = caps-lock,
+         * tap = caps-word. Takes the same two parameters as mirror_ht;
+         * caps_word_p swallows the unused one.
+         */
+        shift_ht: shift_ht {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "tap-preferred";   // decided by time only
+            tapping-term-ms = <SHIFT_HOLD_TERM>;
+            bindings = <&kp>, <&caps_word_p>;
+        };
     };
 
     macros {
+        /* caps_word with an ignored parameter, so it fits a hold-tap. */
+        caps_word_p: caps_word_p {
+            compatible = "zmk,behavior-macro-one-param";
+            #binding-cells = <1>;
+            wait-ms = <0>;
+            tap-ms = <0>;
+            bindings = <&caps_word>;
+        };
+
         /* Taps its parameter twice, so a quick double-tap still types "qq".
          * Zero delays: all four events must go out before the next key,
          * otherwise "seen" comes out as "sene".
@@ -160,6 +182,26 @@ MORPH_MIRROR_KEY(  X,   DOT   )
 MORPH_MIRROR_KEY(  C,   COMMA )
 MORPH_MIRROR_KEY(  V,   M     )
 MORPH_MIRROR_KEY(  B,   N     )
+
+/* ============================================================
+ *  SHIFT KEYS
+ * ------------------------------------------------------------
+ *    tap or hold         -> shift (held while the key is down)
+ *    quick double-tap    -> caps-word
+ *    tap, then hold      -> caps-lock (while held past SHIFT_HOLD_TERM)
+ *  Generates <name> (a tap-dance); bind it in the keymap.
+ *  Same trick as the mirror keys, so a lone tap is sent after
+ *  SHIFT_TAP_SPEED, or straight away if another key is pressed.
+ * ============================================================
+ */
+#define SHIFT_KEY(name, shiftkey)                                              \
+    ZMK_TAP_DANCE(name,                                                        \
+        tapping-term-ms = <SHIFT_TAP_SPEED>;                                   \
+        bindings = <&kp shiftkey>, <&shift_ht CAPS 0>;                         \
+    )
+
+SHIFT_KEY(td_lshift, LSHFT)
+SHIFT_KEY(td_rshift, RSHFT)
 
 /* ============================================================
  *  POINTER TUNING  (overrides ZMK's mouse move / scroll nodes)
@@ -211,25 +253,6 @@ MORPH_MIRROR_KEY(  B,   N     )
             quick-tap-ms = <175>;
             tapping-term-ms = <200>;
             bindings = <&kp>, <&kp>;
-        };
-
-        /* Shift keys: tap or hold = shift, double-tap = caps-word,
-         * triple-tap = caps-lock.
-         */
-        td_lshift: tap_dance_lshift {
-            compatible = "zmk,behavior-tap-dance";
-            #binding-cells = <0>;
-            tapping-term-ms = <SHIFT_TAP_SPEED>;
-            flavor = "hold-preferred";
-            bindings = <&kp LSHFT>, <&caps_word>, <&kp CAPS>;
-        };
-
-        td_rshift: tap_dance_rshift {
-            compatible = "zmk,behavior-tap-dance";
-            #binding-cells = <0>;
-            tapping-term-ms = <SHIFT_TAP_SPEED>;
-            flavor = "hold-preferred";
-            bindings = <&kp RSHFT>, <&caps_word>, <&kp CAPS>;
         };
     };
 
