@@ -15,7 +15,6 @@
  * Mouse emulation reference:
  *   https://v0-3-branch.zmk.dev/docs/keymaps/behaviors/mouse-emulation
  */
-
 /* ============================================================
  *  USER CONFIG  (tunable constants)
  * ------------------------------------------------------------
@@ -30,15 +29,16 @@
  * so scrolling currently runs at ZMK's default of 10. Renaming it would
  * make scrolling 20x faster, so pick a new value if you do rename it.
  */
-#define ZMK_POINTING_DEFAULT_SCROLL_VAL 200
 
+#define ZMK_POINTING_DEFAULT_SCROLL_VAL 200
 #define COMBO_TERM        25   // max ms between the keys of a combo
 #define COMBO_IDLE       200   // ms of idle required before a combo can fire
 #define SHIFT_TAP_SPEED  250   // tap-dance window for the shift keys
 #define SHIFT_HOLD_TERM  200   // ms the 2nd press must be held to become caps-lock
-
 #define MIRROR_TD_TERM   200   // max ms from first press to second press;
+
 // also how long a lone tap waits before it is sent
+
 #define MIRROR_HOLD_TERM 250   // ms the second press must be held to become the mirror key
 
 /* ============================================================
@@ -46,11 +46,11 @@
  * ============================================================
  */
 
+#include <dt-bindings/zmk/modifiers.h>   // MOD_* bit macros
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/pointing.h>
-#include <dt-bindings/zmk/modifiers.h>   // MOD_* bit macros
 #include "zmk-helpers/helper.h"          // ZMK_TAP_DANCE, ZMK_MOD_MORPH
 
 /* ============================================================
@@ -86,13 +86,14 @@
  *                          tapped     -> mirror_dbl Q   (types "qq")
  * ============================================================
  */
-
 /* Shared helpers used by every mirror key. They take the keys as
  * parameters, so one copy of each serves all fifteen letters.
  */
+
 / {
     behaviors {
         /* Modifier held: tap = letter, hold = mirror letter. */
+
         cmd_ht: cmd_hold_tap {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
@@ -104,6 +105,7 @@
         /* Second press of a double-tap: hold = mirror letter,
          * tap = the letter twice.
          */
+
         mirror_ht: mirror_ht {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
@@ -116,6 +118,7 @@
          * tap = caps-word. Takes the same two parameters as mirror_ht;
          * caps_word_p swallows the unused one.
          */
+
         shift_ht: shift_ht {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
@@ -127,6 +130,7 @@
 
     macros {
         /* caps_word with an ignored parameter, so it fits a hold-tap. */
+
         caps_word_p: caps_word_p {
             compatible = "zmk,behavior-macro-one-param";
             #binding-cells = <1>;
@@ -139,13 +143,13 @@
          * Zero delays: all four events must go out before the next key,
          * otherwise "seen" comes out as "sene".
          */
+
         mirror_dbl: mirror_dbl {
             compatible = "zmk,behavior-macro-one-param";
             #binding-cells = <1>;
             wait-ms = <0>;
             tap-ms = <0>;
-            bindings = <&macro_param_1to1>, <&kp MACRO_PLACEHOLDER>,
-                       <&macro_param_1to1>, <&kp MACRO_PLACEHOLDER>;
+            bindings = <&macro_param_1to1 &kp MACRO_PLACEHOLDER &macro_param_1to1 &kp MACRO_PLACEHOLDER>;
         };
     };
 };
@@ -155,6 +159,7 @@
  * root node, so the calls below must stay at top level.
  * Every line of the macro except the last needs its trailing backslash.
  */
+
 #define MORPH_MIRROR_KEY(tapkey, morphkey)                                     \
     ZMK_TAP_DANCE(tapkey##_td,                                                 \
         tapping-term-ms = <MIRROR_TD_TERM>;                                    \
@@ -167,6 +172,7 @@
     )
 
 /*                 tap  mirror   */
+
 MORPH_MIRROR_KEY(  Q,   P     )
 MORPH_MIRROR_KEY(  W,   O     )
 MORPH_MIRROR_KEY(  E,   I     )
@@ -197,6 +203,7 @@ MORPH_MIRROR_KEY(  B,   N     )
  *  Bind as: &<name> <SHIFTKEY>   e.g. &td_lshift LSHFT 0  (2nd cell unused)
  * ============================================================
  */
+
 #define SHIFT_KEY(name)                                                        \
     ZMK_TAP_DANCE(name##_taps,                                                 \
         tapping-term-ms = <SHIFT_TAP_SPEED>;                                   \
@@ -247,11 +254,13 @@ SHIFT_KEY(td_rshift)
     /* -------------------------------------------------------- */
     /*  BEHAVIORS                                               */
     /* -------------------------------------------------------- */
+
     behaviors {
         /* Thumb key: hold = first parameter, tap = second.
          * Used as hold LGUI / tap SPACE. The short term makes
          * the hold kick in almost immediately.
          */
+
         cmd_space: cmd_space {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
@@ -261,6 +270,7 @@ SHIFT_KEY(td_rshift)
         };
 
         /* Numpad keys: tap = digit, hold = bracket or period. */
+
         mt_numpad: mt_numpad {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
@@ -277,12 +287,14 @@ SHIFT_KEY(td_rshift)
     /*  those positions. Combos with no timeout-ms use ZMK's     */
     /*  default (50 ms) and have no idle requirement.            */
     /* -------------------------------------------------------- */
+
     combos {
         compatible = "zmk,combos";
 
         /* --- Top row: adjacent pairs give the shifted number-row symbols,
          *     left to right: ! @ # $ % ^ & * ( ) -                        ---
          */
+
         combo_exclamation {
             bindings = <&kp EXCLAMATION>;
             key-positions = <1 0>;          // Q + ESC
@@ -372,6 +384,7 @@ SHIFT_KEY(td_rshift)
         };
 
         /* --- Brackets / backslash --- */
+
         combo_backslash {
             bindings = <&kp BACKSLASH>;
             key-positions = <23 11>;        // ENTER + BSPC
@@ -391,6 +404,7 @@ SHIFT_KEY(td_rshift)
         };
 
         /* --- Quotes / grave / equals --- */
+
         combo_tilde {
             bindings = <&kp GRAVE>;
             key-positions = <0 12>;         // ESC + TAB  (` and, with Shift, ~)
@@ -410,6 +424,7 @@ SHIFT_KEY(td_rshift)
         };
 
         /* --- Utility keys --- */
+
         combo_globe {
             bindings = <&kp GLOBE>;
             key-positions = <36 28>;        // LCTRL + V
@@ -436,12 +451,13 @@ SHIFT_KEY(td_rshift)
         };
 
         /* --- Layer toggles (three keys together) --- */
+
         combo_numpad_toggle {
             bindings = <&tog 1>;
             key-positions = <14 15 16>;     // S + D + F
             timeout-ms = <COMBO_TERM>;
             require-prior-idle-ms = <COMBO_IDLE>;
-            layers = <0>, <3>, <5>;
+            layers = <0 5 1>;
         };
 
         combo_mirror_toggle {
@@ -449,7 +465,7 @@ SHIFT_KEY(td_rshift)
             key-positions = <2 3 4>;        // W + E + R
             timeout-ms = <COMBO_TERM>;
             require-prior-idle-ms = <COMBO_IDLE>;
-            layers = <0>, <3>, <5>;
+            layers = <0 1 5>;
         };
     };
 
@@ -458,41 +474,48 @@ SHIFT_KEY(td_rshift)
     /*  Each layer is laid out as the physical board: three     */
     /*  rows of 6 + 6 keys, then the 3 + 3 thumb keys.          */
     /* -------------------------------------------------------- */
+
     keymap {
         compatible = "zmk,keymap";
 
         /* --- Layer 0: Base (left-hand letters are mirror keys) --- */
+
         base_layer {
             display-name = "Base";
-            bindings = <&kp ESC &Q_morph &W_morph &E_morph &R_morph &T_morph &kp Y &kp U &kp I &kp O
-                        &kp P &kp BSPC &kp TAB &A_morph &S_morph &D_morph &F_morph &G_morph &kp H
-                        &kp J &kp K &kp L &kp SEMI &kp ENTER &td_lshift LSHFT 0 &Z_morph &X_morph &C_morph
-                        &V_morph &B_morph &kp N &kp M &kp COMMA &kp DOT &kp FSLH &td_rshift RSHFT 0 &kp
-                        LCTRL &kp LALT &cmd_space LGUI SPACE &lt 2 SPACE &mo 3 &mo 4>;
+            bindings = <
+&kp ESC             &Q_morph  &W_morph  &E_morph   &R_morph  &T_morph                 &kp Y        &kp U  &kp I      &kp O    &kp P     &kp BSPC
+&kp TAB             &A_morph  &S_morph  &D_morph   &F_morph  &G_morph                 &kp H        &kp J  &kp K      &kp L    &kp SEMI  &kp ENTER
+&td_lshift LSHFT 0  &Z_morph  &X_morph  &C_morph   &V_morph  &B_morph                 &kp N        &kp M  &kp COMMA  &kp DOT  &kp FSLH  &td_rshift RSHFT 0
+                                        &kp LCTRL  &kp LALT  &cmd_space LGUI SPACE    &lt 2 SPACE  &mo 3  &mo 4
+            >;
         };
 
         /* --- Layer 1: NumPad (toggle with S + D + F) ---
          * Hold 8 = (   hold 9 = )   hold 5 = .
          */
+
         numpad_layer {
             display-name = "NumPad";
-            bindings = <&trans &kp KP_MULTIPLY &kp KP_N7 &mt_numpad LPAR KP_N8 &mt_numpad RPAR KP_N9
-                        &kp KP_PLUS &trans &trans &trans &trans &trans &trans &trans &kp KP_DIVIDE
-                        &kp KP_N4 &mt_numpad PERIOD KP_N5 &kp KP_N6 &kp KP_SUBTRACT &trans &trans
-                        &trans &trans &trans &trans &trans &kp KP_N0 &kp KP_N1 &kp KP_N2 &kp KP_N3
-                        &kp KP_EQUAL &trans &trans &trans &trans &trans &trans &trans &trans &trans
-                        &trans &trans &trans>;
+            bindings = <
+&trans  &kp KP_MULTIPLY  &kp KP_N7  &mt_numpad LPAR KP_N8    &mt_numpad RPAR KP_N9  &kp KP_PLUS        &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &kp KP_DIVIDE    &kp KP_N4  &mt_numpad PERIOD KP_N5  &kp KP_N6              &kp KP_SUBTRACT    &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &kp KP_N0        &kp KP_N1  &kp KP_N2                &kp KP_N3              &kp KP_EQUAL       &trans  &trans  &trans  &trans  &trans  &trans
+                                    &trans                   &trans                 &trans             &trans  &trans  &trans
+            >;
         };
 
         /* --- Layer 2: Numbers & function keys ---
          * Hold the first right thumb key (tapping it types SPACE).
          */
+
         num_fn_layer {
             display-name = "Num&Fn";
-            bindings = <&trans &kp N1 &kp N2 &kp N3 &kp N4 &kp N5 &kp N6 &kp N7 &kp N8 &kp N9 &kp N0
-                        &kp BSPC &trans &kp F1 &kp F2 &kp F3 &kp F4 &kp F5 &kp F6 &kp F7 &kp F8 &kp
-                        F9 &kp F10 &trans &trans &kp F11 &kp F12 &trans &trans &trans &trans &trans
-                        &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans>;
+            bindings = <
+&trans  &kp N1   &kp N2   &kp N3  &kp N4  &kp N5    &kp N6  &kp N7  &kp N8  &kp N9  &kp N0   &kp BSPC
+&trans  &kp F1   &kp F2   &kp F3  &kp F4  &kp F5    &kp F6  &kp F7  &kp F8  &kp F9  &kp F10  &trans
+&trans  &kp F11  &kp F12  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans   &trans
+                          &trans  &trans  &trans    &trans  &trans  &trans
+            >;
         };
 
         /* --- Layer 3: Navigation, media and mouse ---
@@ -501,14 +524,15 @@ SHIFT_KEY(td_rshift)
          * Right: volume and mute on Y/H/N, mouse move on I/J/K/L with
          *        scroll around it, mouse buttons on the bottom row.
          */
+
         nav_layer {
             display-name = "Navigation";
-            bindings = <&trans &trans &trans &kp UP &trans &kp C_BRI_UP &kp C_VOL_UP &msc SCRL_RIGHT
-                        &mmv MOVE_UP &msc SCRL_LEFT &msc SCRL_DOWN &trans &trans &trans &kp LEFT &kp
-                        DOWN &kp RIGHT &kp C_BRI_DN &kp C_VOL_DN &mmv MOVE_LEFT &mmv MOVE_DOWN &mmv
-                        MOVE_RIGHT &msc SCRL_UP &trans &trans &trans &trans &trans &trans &trans &kp
-                        C_MUTE &mkp MB1 &mkp MB3 &mkp MB2 &trans &trans &trans &trans &trans &trans
-                        &trans &trans>;
+            bindings = <
+&trans  &trans  &trans    &kp UP    &trans     &kp C_BRI_UP    &kp C_VOL_UP  &msc SCRL_RIGHT  &mmv MOVE_UP    &msc SCRL_LEFT   &msc SCRL_DOWN  &trans
+&trans  &trans  &kp LEFT  &kp DOWN  &kp RIGHT  &kp C_BRI_DN    &kp C_VOL_DN  &mmv MOVE_LEFT   &mmv MOVE_DOWN  &mmv MOVE_RIGHT  &msc SCRL_UP    &trans
+&trans  &trans  &trans    &trans    &trans     &trans          &kp C_MUTE    &mkp MB1         &mkp MB3        &mkp MB2         &trans          &trans
+                          &trans    &trans     &trans          &trans        &trans           &trans
+            >;
         };
 
         /* --- Layer 4: Settings ---
@@ -516,26 +540,30 @@ SHIFT_KEY(td_rshift)
          * Bluetooth profiles and clear, media transport, arrows and
          * scroll, firmware reset on either half's bottom row.
          */
+
         settings_layer {
             display-name = "Settings";
-            bindings = <&trans &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4
-                        &trans &msc SCRL_RIGHT &kp UP &msc SCRL_LEFT &msc SCRL_DOWN &bt BT_CLR
-                        &trans &none &kp C_PREV &kp C_PP &kp C_NEXT &trans &trans &kp LEFT &kp DOWN
-                        &kp RIGHT &msc SCRL_UP &trans &sys_reset &trans &trans &trans &trans &trans
-                        &trans &trans &trans &trans &sys_reset &trans &trans &trans &trans &trans
-                        &trans &trans>;
+            bindings = <
+&trans      &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4    &trans  &msc SCRL_RIGHT  &kp UP    &msc SCRL_LEFT  &msc SCRL_DOWN  &bt BT_CLR
+&trans      &none         &kp C_PREV    &kp C_PP      &kp C_NEXT    &trans          &trans  &kp LEFT         &kp DOWN  &kp RIGHT       &msc SCRL_UP    &trans
+&sys_reset  &trans        &trans        &trans        &trans        &trans          &trans  &trans           &trans    &trans          &sys_reset      &trans
+                                        &trans        &trans        &trans          &trans  &trans           &trans
+            >;
         };
 
         /* --- Layer 5: Mirror (toggle with W + E + R) ---
          * Full mirrored layout for one-handed typing: each half
          * types the other half's letters.
          */
+
         mirror_layer {
             display-name = "Mirror";
-            bindings = <&trans &kp P &kp O &kp I &kp U &kp Y &kp T &kp R &kp E &kp W &kp Q &trans
-                        &trans &kp SEMI &kp L &kp K &kp J &kp H &kp G &kp F &kp D &kp S &kp A &trans
-                        &trans &kp FSLH &kp DOT &kp COMMA &kp M &kp N &kp B &kp V &kp C &kp X &kp Z
-                        &trans &trans &trans &trans &trans &trans &trans>;
+            bindings = <
+&trans  &kp P     &kp O    &kp I      &kp U   &kp Y     &kp T   &kp R   &kp E   &kp W  &kp Q  &trans
+&trans  &kp SEMI  &kp L    &kp K      &kp J   &kp H     &kp G   &kp F   &kp D   &kp S  &kp A  &trans
+&trans  &kp FSLH  &kp DOT  &kp COMMA  &kp M   &kp N     &kp B   &kp V   &kp C   &kp X  &kp Z  &trans
+                           &trans     &trans  &trans    &trans  &trans  &trans
+            >;
         };
     };
 };
