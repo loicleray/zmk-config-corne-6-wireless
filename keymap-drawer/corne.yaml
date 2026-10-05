@@ -43,6 +43,49 @@ layers:
   - {t: SPACE, h: Num&Fn}
   - Navigation
   - Settings
+  Mirror:
+  - {t: ▽, type: trans}
+  - P
+  - O
+  - I
+  - U
+  - Y
+  - T
+  - R
+  - E
+  - W
+  - Q
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - ;
+  - L
+  - K
+  - J
+  - H
+  - G
+  - F
+  - D
+  - S
+  - A
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - /
+  - .
+  - ','
+  - M
+  - N
+  - B
+  - V
+  - C
+  - X
+  - Z
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
   NumPad:
   - {t: ▽, type: trans}
   - KP MULTIPLY
@@ -215,49 +258,6 @@ layers:
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {type: held}
-  Mirror:
-  - {t: ▽, type: trans}
-  - P
-  - O
-  - I
-  - U
-  - Y
-  - T
-  - R
-  - E
-  - W
-  - Q
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - ;
-  - L
-  - K
-  - J
-  - H
-  - G
-  - F
-  - D
-  - S
-  - A
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - /
-  - .
-  - ','
-  - M
-  - N
-  - B
-  - V
-  - C
-  - X
-  - Z
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
 combos:
 - p: [1, 0]
   k: '!'
