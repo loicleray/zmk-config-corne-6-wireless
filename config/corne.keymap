@@ -325,7 +325,7 @@
          *  The same combo on the layer itself goes back to Base (0).
          */
 
-        combo_base_on {
+        combo_base_on_left {
             bindings = <&to 0>;
             key-positions = <14 15 16>;    // S + D + F
             timeout-ms = <COMBO_TERM>;
@@ -333,7 +333,7 @@
             layers = <1 5>;
         };
 
-        combo_mirror_on {
+        combo_mirror_on_left {
             bindings = <&to 5>;
             key-positions = <2 3 4>;       // W + E + R
             timeout-ms = <COMBO_TERM>;
@@ -341,9 +341,33 @@
             layers = <0 1>;
         };
 
-        combo_numpad_on {
+        combo_numpad_on_left {
             bindings = <&to 1>;
             key-positions = <26 27 28>;
+            timeout-ms = <COMBO_TERM>;
+            require-prior-idle-ms = <COMBO_IDLE>;
+            layers = <0 5>;
+        };
+
+        combo_base_on_right {
+            bindings = <&to 0>;
+            key-positions = <19 20 21>;
+            timeout-ms = <COMBO_TERM>;
+            require-prior-idle-ms = <COMBO_IDLE>;
+            layers = <1 5>;
+        };
+
+        combo_mirror_on_right {
+            bindings = <&to 5>;
+            key-positions = <7 8 9>;
+            timeout-ms = <COMBO_TERM>;
+            require-prior-idle-ms = <COMBO_IDLE>;
+            layers = <0 1>;
+        };
+
+        combo_numpad_on_right {
+            bindings = <&to 1>;
+            key-positions = <32 33 31>;
             timeout-ms = <COMBO_TERM>;
             require-prior-idle-ms = <COMBO_IDLE>;
             layers = <0 5>;
