@@ -129,8 +129,8 @@
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             flavor = "tap-preferred";
-            quick-tap-ms = <175>;
-            tapping-term-ms = <200>;
+            quick-tap-ms = <180>;
+            tapping-term-ms = <250>;
             bindings = <&kp>, <&kp>;
         };
     };
@@ -417,10 +417,10 @@
         numpad_layer {
             display-name = "NumPad";
             bindings = <
-&trans  &kp KP_MULTIPLY  &kp KP_N7  &mt_numpad LPAR KP_N8    &mt_numpad RPAR KP_N9  &kp KP_PLUS        &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &kp KP_DIVIDE    &kp KP_N4  &mt_numpad PERIOD KP_N5  &kp KP_N6              &kp KP_SUBTRACT    &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &kp KP_N0        &kp KP_N1  &kp KP_N2                &kp KP_N3              &kp KP_EQUAL       &trans  &trans  &trans  &trans  &trans  &trans
-                                    &trans                   &trans                 &trans             &trans  &trans  &trans
+&trans  &kp KP_MULTIPLY  &mt_numpad LEFT_PARENTHESIS KP_N7  &kp KP_N8               &mt_numpad RPAR KP_N9  &kp KP_PLUS        &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &kp KP_DIVIDE    &kp KP_N4                          &mt_numpad KP_N0 KP_N5  &kp KP_N6              &kp KP_SUBTRACT    &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &kp KP_N0        &kp KP_N1                          &mt_numpad DOT KP_N2    &kp KP_N3              &kp KP_EQUAL       &trans  &trans  &trans  &trans  &trans  &trans
+                                                            &trans                  &trans                 &trans             &trans  &trans  &trans
             >;
         };
 
