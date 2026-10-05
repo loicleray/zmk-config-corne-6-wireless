@@ -37,6 +37,7 @@
 // L and R Mirror Terms
 #define MIRROR_TD_TERM   200   // max ms from first press to second press (also how long a lone tap waits)
 #define MIRROR_HOLD_TERM 240   // ms the second press must be held to become the mirror key
+#define STREAK_TERM      150   // typing streak: a letter pressed within this many ms of the previous key is sent at once
 
 // Various Include
 #include <dt-bindings/zmk/modifiers.h>
@@ -59,38 +60,58 @@
  *    tap, then tap-and-hold  -> the mirror letter, held (p)
  *    quick double-tap        -> the letter twice        (qq)
  *
+ *  Shift held:
+ *    tap                     -> the letter, on release  (Q, no wait)
+ *    hold                    -> the mirror letter       (P)
+ *
  *  Ctrl / Alt / GUI held:
  *    mod + tap               -> mod + letter            (Cmd+Q)
  *    mod + hold              -> mod + mirror letter     (Cmd+P)
  *
- *  Shift held:
- *    tap                     -> the letter, sent on release (no wait)
- *    hold                    -> the mirror letter    (P)
+ *  Typing streak: a letter pressed within STREAK_TERM of the
+ *  previous key skips the wait below and is sent at once (so
+ *  normal typing has no lag). Only the first letter after a pause
+ *  can start the mirror gestures.
  *
- *  Trade-off: with no modifier held, a letter is sent after
- *  MIRROR_TD_TERM, or straight away if another key is pressed
- *  first. In "tap, then tap-and-hold" the first tap is swallowed.
+ *  Trade-off: with no modifier held, after a pause a letter is
+ *  sent after MIRROR_TD_TERM, or straight away if another key is
+ *  pressed first. In "tap, then tap-and-hold" the first tap is
+ *  swallowed.
  *
- *  How it is wired, per key (Q shown; right-hand keys work the same):
- *    Q_morph  (mod-morph)  Ctrl/Alt/GUI held? -> cmd_ht P Q
- *                          otherwise          -> Q_sm
- *    Q_sm     (mod-morph)  Shift held? -> cmd_ht P Q
- *                          otherwise   -> Q_td
- *    Q_td     (tap-dance)  1 press    -> kp Q
- *                          2 presses  -> mirror_ht P Q
- *    mirror_ht (hold-tap)  held       -> kp P
- *                          tapped     -> mirror_dbl Q   (types "qq")
+ *  How it is wired, per key (Q shown; right-hand keys work the same).
+ *  Each key is checked top to bottom; the first match wins:
+ *
+ *    Q_morph   mod-morph   Ctrl/Alt/GUI held?  -> mod_ht P Q
+ *                          otherwise           -> Q_sm
+ *    Q_sm      mod-morph   Shift held?         -> mod_ht P Q
+ *                          otherwise           -> Q_ht
+ *    Q_ht      hold-tap    pressed within STREAK_TERM of the previous
+ *                          key                 -> kp Q (at once)
+ *                          otherwise           -> Q_td (after 1 ms)
+ *    Q_td      tap-dance   1 press             -> kp Q
+ *                          2 presses           -> mirror_ht P Q
+ *
+ *    mod_ht    hold-tap    tap -> kp Q,  hold -> kp P      (single press)
+ *    mirror_ht hold-tap    tap -> mirror_dbl Q (types "qq"),
+ *                          hold -> kp P                    (2nd press)
+ *
+ *  Everything below, in reading order: the two hold-taps and the
+ *  macro they use, then MORPH_MIRROR_KEY (which builds Q_td, Q_sm
+ *  and Q_morph), then one call per key. Bind <KEY>_morph in the
+ *  keymap.
  * ============================================================
  */
-/* Shared helpers used by every mirror key. They take the keys as
- * parameters, so one copy of each serves every mirror key.
- */
+
+/* --- Shared helpers (take the keys as parameters, so one copy
+ *     serves every mirror key) --- */
 
 / {
     behaviors {
-        /* Modifier held: tap = letter, hold = mirror letter. */
+        /* Single press with a modifier held (Shift or Ctrl/Alt/GUI):
+         * tap = letter, hold = mirror letter.
+         */
 
-        cmd_ht: cmd_hold_tap {
+        mod_ht: mod_hold_tap {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             flavor = "tap-preferred";
@@ -128,28 +149,41 @@
     };
 };
 
-/* Generates <TAPKEY>_td (tap-dance), <TAPKEY>_sm (shift mod-morph) and
- * <TAPKEY>_morph (Ctrl/Alt/GUI mod-morph).
- * Bind <TAPKEY>_morph in the keymap. Both helpers emit their own
- * root node, so the calls below must stay at top level.
- * Every line of the macro except the last needs its trailing backslash.
- */
+/* --- MORPH_MIRROR_KEY: builds the three per-key nodes, innermost
+ *     first, so each one is defined before it is used.
+ *     The helpers it calls emit their own root nodes, so the calls
+ *     below must stay at top level. Every line of the macro except
+ *     the last needs its trailing backslash. --- */
 
 #define MORPH_MIRROR_KEY(tapkey, morphkey)                                     \
-    ZMK_MOD_MORPH(tapkey##_sm,                                                 \
-        bindings = <&tapkey##_td>, <&cmd_ht morphkey tapkey>;                               \
-        mods      = <(MOD_LSFT|MOD_RSFT)>;                                     \
-        keep-mods = <(MOD_LSFT|MOD_RSFT)>;                                     \
+    /* Typing streak: hold-tap that sends the letter at once if pressed */     \
+    /* within STREAK_TERM of the previous key, else hands over to _td   */     \
+    /* after 1 ms (hold-preferred, so another key press hands over too) */     \
+    ZMK_HOLD_TAP(tapkey##_ht,                                                  \
+        flavor = "hold-preferred";                                             \
+        tapping-term-ms = <1>;                                                 \
+        require-prior-idle-ms = <STREAK_TERM>;                                 \
+        bindings = <&tapkey##_td>, <&kp>;                                      \
     )                                                                          \
+    /* No modifier: tap-dance, 1 press = letter, 2 presses = mirror_ht */      \
     ZMK_TAP_DANCE(tapkey##_td,                                                 \
         tapping-term-ms = <MIRROR_TD_TERM>;                                    \
         bindings = <&kp tapkey>, <&mirror_ht morphkey tapkey>;                 \
     )                                                                          \
+    /* Shift held: skip the tap-dance wait */                                  \
+    ZMK_MOD_MORPH(tapkey##_sm,                                                 \
+        bindings = <&tapkey##_ht 0 tapkey>, <&mod_ht morphkey tapkey>;         \
+        mods      = <(MOD_LSFT|MOD_RSFT)>;                                     \
+        keep-mods = <(MOD_LSFT|MOD_RSFT)>;                                     \
+    )                                                                          \
+    /* Ctrl/Alt/GUI held: skip the tap-dance wait (bind this one) */           \
     ZMK_MOD_MORPH(tapkey##_morph,                                              \
-        bindings = <&tapkey##_sm>, <&cmd_ht morphkey tapkey>;                  \
+        bindings = <&tapkey##_sm>, <&mod_ht morphkey tapkey>;                  \
         mods      = <(MOD_LCTL|MOD_RCTL|MOD_LALT|MOD_RALT|MOD_LGUI|MOD_RGUI)>; \
         keep-mods = <(MOD_LCTL|MOD_RCTL|MOD_LALT|MOD_RALT|MOD_LGUI|MOD_RGUI)>; \
     )
+
+/* --- One call per key --- */
 
 /*                 tap  mirror   (left hand -> right hand) */
 
