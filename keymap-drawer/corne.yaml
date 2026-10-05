@@ -328,7 +328,13 @@ combos:
   k: TAB
 - p: [14, 15, 16]
   k: {t: NumPad, h: toggle}
-  l: [Base, Mirror, NumPad]
+  l: [Base, Mirror]
+- p: [14, 15, 16]
+  k: {t: Base, h: toggle}
+  l: [NumPad]
 - p: [2, 3, 4]
   k: {t: Mirror, h: toggle}
-  l: [Base, NumPad, Mirror]
+  l: [Base, NumPad]
+- p: [2, 3, 4]
+  k: {t: Base, h: toggle}
+  l: [Mirror]
