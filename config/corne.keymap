@@ -214,7 +214,7 @@ MORPH_MIRROR_KEY(  B,   N     )
             name: name {                                                       \
                 compatible = "zmk,behavior-hold-tap";                          \
                 #binding-cells = <2>;                                          \
-                flavor = "tap-preferred";                                     \
+                flavor = "hold-preferred";                                     \
                 tapping-term-ms = <SHIFT_HOLD_TERM>;                           \
                 quick-tap-ms = <SHIFT_TAP_SPEED>;                              \
                 bindings = <&kp>, <&name##_taps>;                              \
