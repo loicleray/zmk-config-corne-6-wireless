@@ -89,8 +89,8 @@ layers:
   NumPad:
   - {t: ▽, type: trans}
   - KP MULTIPLY
-  - KP 7
-  - {t: KP 8, h: (}
+  - {t: KP 7, h: (}
+  - KP 8
   - {t: KP 9, h: )}
   - KP PLUS
   - {t: ▽, type: trans}
@@ -102,7 +102,7 @@ layers:
   - {t: ▽, type: trans}
   - KP DIVIDE
   - KP 4
-  - {t: KP 5, h: .}
+  - {t: KP 5, h: KP 0}
   - KP 6
   - KP SUBTRACT
   - {t: ▽, type: trans}
@@ -114,7 +114,7 @@ layers:
   - {t: ▽, type: trans}
   - KP 0
   - KP 1
-  - KP 2
+  - {t: KP 2, h: .}
   - KP 3
   - KP EQUAL
   - {t: ▽, type: trans}
