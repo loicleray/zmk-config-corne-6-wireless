@@ -25,7 +25,7 @@ layers:
   - L
   - ;
   - ENTER
-  - '&td_lshift LSHFT 0'
+  - '&td_lshift'
   - '&Z_morph'
   - '&X_morph'
   - '&C_morph'
@@ -36,7 +36,7 @@ layers:
   - ','
   - .
   - /
-  - '&td_rshift RSHFT 0'
+  - '&td_rshift'
   - LCTRL
   - LALT
   - {t: SPACE, h: LGUI}
