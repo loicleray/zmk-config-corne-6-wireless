@@ -31,15 +31,15 @@
  */
 
 #define ZMK_POINTING_DEFAULT_SCROLL_VAL 200
+
 #define COMBO_TERM        25   // max ms between the keys of a combo
 #define COMBO_IDLE       200   // ms of idle required before a combo can fire
-#define SHIFT_TAP_TERM  250   // tap-dance window for the shift keys
-#define SHIFT_HOLD_TERM  200   // ms the 2nd press must be held to become caps-lock
+
+#define SHIFT_TAP_TERM  200   // tap-dance window for the shift keys
+#define SHIFT_HOLD_TERM  240   // ms the 2nd press must be held to become caps-lock
+
 #define MIRROR_TD_TERM   200   // max ms from first press to second press;
-
-// also how long a lone tap waits before it is sent
-
-#define MIRROR_HOLD_TERM 250   // ms the second press must be held to become the mirror key
+#define MIRROR_HOLD_TERM 300   // ms the second press must be held to become the mirror key
 
 /* ============================================================
  *  INCLUDES  (helper.h MUST come last, after behaviors.dtsi)
@@ -165,6 +165,24 @@ MORPH_MIRROR_KEY(  X,   DOT   )
 MORPH_MIRROR_KEY(  C,   COMMA )
 MORPH_MIRROR_KEY(  V,   M     )
 MORPH_MIRROR_KEY(  B,   N     )
+
+/*                 tap  mirror   (right hand -> left hand) */
+
+MORPH_MIRROR_KEY(  P,   Q     )
+MORPH_MIRROR_KEY(  O,   W     )
+MORPH_MIRROR_KEY(  I,   E     )
+MORPH_MIRROR_KEY(  U,   R     )
+MORPH_MIRROR_KEY(  Y,   T     )
+MORPH_MIRROR_KEY(  SEMI, A    )
+MORPH_MIRROR_KEY(  L,   S     )
+MORPH_MIRROR_KEY(  K,   D     )
+MORPH_MIRROR_KEY(  J,   F     )
+MORPH_MIRROR_KEY(  H,   G     )
+MORPH_MIRROR_KEY(  FSLH, Z    )
+MORPH_MIRROR_KEY(  DOT, X     )
+MORPH_MIRROR_KEY(  COMMA, C   )
+MORPH_MIRROR_KEY(  M,   V     )
+MORPH_MIRROR_KEY(  N,   B     )
 
 /* ============================================================
  *  SHIFT KEYS
@@ -467,11 +485,12 @@ SHIFT_KEY(td_rshift, RSHFT)
 
         base_layer {
             display-name = "Base";
-            bindings = <&kp ESC &Q_morph &W_morph &E_morph &R_morph &T_morph &kp Y &kp U &kp I &kp O
-                        &kp P &kp BSPC &kp TAB &A_morph &S_morph &D_morph &F_morph &G_morph &kp H
-                        &kp J &kp K &kp L &kp SEMI &kp ENTER &td_lshift &Z_morph &X_morph
-                        &C_morph &V_morph &B_morph &kp N &kp M &kp COMMA &kp DOT &kp FSLH &td_rshift
-                        &kp LCTRL &kp LALT &cmd_space LGUI SPACE &lt 2 SPACE &mo 3 &mo 4>;
+            bindings = <&kp ESC &Q_morph &W_morph &E_morph &R_morph &T_morph &Y_morph &U_morph
+                        &I_morph &O_morph &P_morph &kp BSPC &kp TAB &A_morph &S_morph &D_morph
+                        &F_morph &G_morph &H_morph &J_morph &K_morph &L_morph &SEMI_morph &kp ENTER
+                        &td_lshift &Z_morph &X_morph &C_morph &V_morph &B_morph &N_morph &M_morph
+                        &COMMA_morph &DOT_morph &FSLH_morph &td_rshift &kp LCTRL &kp LALT &cmd_space
+                        LGUI SPACE &lt 2 SPACE &mo 3 &mo 4>;
         };
 
         /* --- Layer 1: NumPad (toggle with S + D + F) ---
