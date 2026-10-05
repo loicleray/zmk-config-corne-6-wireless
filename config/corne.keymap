@@ -194,7 +194,7 @@ MORPH_MIRROR_KEY(  B,   N     )
  *  lowercase. The outer hold-tap decides on the key press itself
  *  (hold-preferred), so shift is down before the letter is replayed.
  *  A tap falls through to the tap-dance, which counts the taps.
- *  Bind as: &<name> <SHIFTKEY>   e.g. &td_lshift LSHFT
+ *  Bind as: &<name> <SHIFTKEY>   e.g. &td_lshift LSHFT 0  (2nd cell unused)
  * ============================================================
  */
 #define SHIFT_KEY(name)                                                        \
@@ -206,7 +206,7 @@ MORPH_MIRROR_KEY(  B,   N     )
         behaviors {                                                            \
             name: name {                                                       \
                 compatible = "zmk,behavior-hold-tap";                          \
-                #binding-cells = <1>;                                          \
+                #binding-cells = <2>;                                          \
                 flavor = "hold-preferred";                                     \
                 tapping-term-ms = <SHIFT_HOLD_TERM>;                           \
                 quick-tap-ms = <SHIFT_TAP_SPEED>;                              \
@@ -466,8 +466,8 @@ SHIFT_KEY(td_rshift)
             display-name = "Base";
             bindings = <&kp ESC &Q_morph &W_morph &E_morph &R_morph &T_morph &kp Y &kp U &kp I &kp O
                         &kp P &kp BSPC &kp TAB &A_morph &S_morph &D_morph &F_morph &G_morph &kp H
-                        &kp J &kp K &kp L &kp SEMI &kp ENTER &td_lshift LSHFT &Z_morph &X_morph &C_morph
-                        &V_morph &B_morph &kp N &kp M &kp COMMA &kp DOT &kp FSLH &td_rshift RSHFT &kp
+                        &kp J &kp K &kp L &kp SEMI &kp ENTER &td_lshift LSHFT 0 &Z_morph &X_morph &C_morph
+                        &V_morph &B_morph &kp N &kp M &kp COMMA &kp DOT &kp FSLH &td_rshift RSHFT 0 &kp
                         LCTRL &kp LALT &cmd_space LGUI SPACE &lt 2 SPACE &mo 3 &mo 4>;
         };
 
