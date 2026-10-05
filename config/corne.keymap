@@ -32,12 +32,12 @@
 #define COMBO_IDLE       200   // ms of idle required before a combo can fire
 
 // Modded Shift Terms
-#define SHIFT_TAP_TERM  200   // tap-dance window for the shift keys
+#define SHIFT_TAP_TERM  180   // tap-dance window for the shift keys
 #define SHIFT_HOLD_TERM  240   // ms the 2nd press must be held to become caps-lock
 
 // L and R Mirror Terms
-#define MIRROR_TD_TERM   200   // max ms from first press to second press (also how long a lone tap waits)
-#define MIRROR_HOLD_TERM 300   // ms the second press must be held to become the mirror key
+#define MIRROR_TD_TERM   180   // max ms from first press to second press (also how long a lone tap waits)
+#define MIRROR_HOLD_TERM 250   // ms the second press must be held to become the mirror key
 
 // Various Include
 #include <dt-bindings/zmk/modifiers.h>
