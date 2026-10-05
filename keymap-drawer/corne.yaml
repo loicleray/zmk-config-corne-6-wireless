@@ -2,40 +2,40 @@ layout: {zmk_keyboard: corne}
 layers:
   Base:
   - ESC
-  - '&Q_morph'
-  - '&W_morph'
-  - '&E_morph'
-  - '&R_morph'
-  - '&T_morph'
-  - '&Y_morph'
-  - '&U_morph'
-  - '&I_morph'
-  - '&O_morph'
-  - '&P_morph'
+  - Q
+  - W
+  - E
+  - R
+  - T
+  - Y
+  - U
+  - I
+  - O
+  - P
   - BSPC
   - TAB
-  - '&A_morph'
-  - '&S_morph'
-  - '&D_morph'
-  - '&F_morph'
-  - '&G_morph'
-  - '&H_morph'
-  - '&J_morph'
-  - '&K_morph'
-  - '&L_morph'
-  - '&SEMI_morph'
+  - A
+  - S
+  - D
+  - F
+  - G
+  - H
+  - J
+  - K
+  - L
+  - ;
   - ENTER
   - LSHFT
-  - '&Z_morph'
-  - '&X_morph'
-  - '&C_morph'
-  - '&V_morph'
-  - '&B_morph'
-  - '&N_morph'
-  - '&M_morph'
-  - '&COMMA_morph'
-  - '&DOT_morph'
-  - '&FSLH_morph'
+  - Z
+  - X
+  - C
+  - V
+  - B
+  - N
+  - M
+  - ','
+  - .
+  - /
   - RSHFT
   - LCTRL
   - LALT
@@ -311,10 +311,10 @@ combos:
   k: '='
   l: [Base]
 - p: [12, 24]
-  k: '&n_shift_ht CAPS 0'
+  k: {t: '&caps_word_p', h: CAPS}
   l: [Base]
 - p: [23, 35]
-  k: '&n_shift_ht CAPS 0'
+  k: {t: '&caps_word_p', h: CAPS}
   l: [Base]
 - p: [36, 28]
   k: GLOBE
