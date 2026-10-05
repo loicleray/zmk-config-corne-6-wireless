@@ -63,16 +63,19 @@
  *    mod + tap               -> mod + letter            (Cmd+Q)
  *    mod + hold              -> mod + mirror letter     (Cmd+P)
  *
- *  Shift is not a trigger modifier, so it follows the
- *  no-modifier rules (Shift + tap, tap-and-hold -> P).
+ *  Shift held:
+ *    tap                     -> the letter, sent on release (no wait)
+ *    hold                    -> the mirror letter    (P)
  *
  *  Trade-off: with no modifier held, a letter is sent after
  *  MIRROR_TD_TERM, or straight away if another key is pressed
  *  first. In "tap, then tap-and-hold" the first tap is swallowed.
  *
  *  How it is wired, per key (Q shown; right-hand keys work the same):
- *    Q_morph  (mod-morph)  mod held?  -> cmd_ht P Q
- *                          otherwise  -> Q_td
+ *    Q_morph  (mod-morph)  Ctrl/Alt/GUI held? -> cmd_ht P Q
+ *                          otherwise          -> Q_sm
+ *    Q_sm     (mod-morph)  Shift held? -> cmd_ht P Q
+ *                          otherwise   -> Q_td
  *    Q_td     (tap-dance)  1 press    -> kp Q
  *                          2 presses  -> mirror_ht P Q
  *    mirror_ht (hold-tap)  held       -> kp P
@@ -125,19 +128,25 @@
     };
 };
 
-/* Generates <TAPKEY>_td (tap-dance) and <TAPKEY>_morph (mod-morph).
+/* Generates <TAPKEY>_td (tap-dance), <TAPKEY>_sm (shift mod-morph) and
+ * <TAPKEY>_morph (Ctrl/Alt/GUI mod-morph).
  * Bind <TAPKEY>_morph in the keymap. Both helpers emit their own
  * root node, so the calls below must stay at top level.
  * Every line of the macro except the last needs its trailing backslash.
  */
 
 #define MORPH_MIRROR_KEY(tapkey, morphkey)                                     \
+    ZMK_MOD_MORPH(tapkey##_sm,                                                 \
+        bindings = <&tapkey##_td>, <&cmd_ht morphkey tapkey>;                               \
+        mods      = <(MOD_LSFT|MOD_RSFT)>;                                     \
+        keep-mods = <(MOD_LSFT|MOD_RSFT)>;                                     \
+    )                                                                          \
     ZMK_TAP_DANCE(tapkey##_td,                                                 \
         tapping-term-ms = <MIRROR_TD_TERM>;                                    \
         bindings = <&kp tapkey>, <&mirror_ht morphkey tapkey>;                 \
     )                                                                          \
     ZMK_MOD_MORPH(tapkey##_morph,                                              \
-        bindings = <&tapkey##_td>, <&cmd_ht morphkey tapkey>;                  \
+        bindings = <&tapkey##_sm>, <&cmd_ht morphkey tapkey>;                  \
         mods      = <(MOD_LCTL|MOD_RCTL|MOD_LALT|MOD_RALT|MOD_LGUI|MOD_RGUI)>; \
         keep-mods = <(MOD_LCTL|MOD_RCTL|MOD_LALT|MOD_RALT|MOD_LGUI|MOD_RGUI)>; \
     )
