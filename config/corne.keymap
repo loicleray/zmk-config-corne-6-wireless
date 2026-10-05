@@ -495,22 +495,41 @@ MORPH_MIRROR_KEY(  N,   B     )
             key-positions = <30 18>;        // N + H
         };
 
-        /* --- Layer toggles (three keys together) --- */
+        /* --- Layer toggles (three keys together) ---
+         *  &to switches the layer on and turns every other toggled layer off.
+         *  The same combo on the layer itself goes back to Base (0).
+         */
 
-        combo_numpad_toggle {
-            bindings = <&tog 1>;
-            key-positions = <14 15 16>;     // S + D + F
+        combo_numpad_on {
+            bindings = <&to 1>;
+            key-positions = <14 15 16>;    // S + D + F
             timeout-ms = <COMBO_TERM>;
             require-prior-idle-ms = <COMBO_IDLE>;
-            layers = <0 5 1>;
+            layers = <0 5>;
         };
 
-        combo_mirror_toggle {
-            bindings = <&tog 5>;
-            key-positions = <2 3 4>;        // W + E + R
+        combo_numpad_off {
+            bindings = <&to 0>;
+            key-positions = <14 15 16>;    // S + D + F
             timeout-ms = <COMBO_TERM>;
             require-prior-idle-ms = <COMBO_IDLE>;
-            layers = <0 1 5>;
+            layers = <1>;
+        };
+
+        combo_mirror_on {
+            bindings = <&to 5>;
+            key-positions = <2 3 4>;       // W + E + R
+            timeout-ms = <COMBO_TERM>;
+            require-prior-idle-ms = <COMBO_IDLE>;
+            layers = <0 1>;
+        };
+
+        combo_mirror_off {
+            bindings = <&to 0>;
+            key-positions = <2 3 4>;       // W + E + R
+            timeout-ms = <COMBO_TERM>;
+            require-prior-idle-ms = <COMBO_IDLE>;
+            layers = <5>;
         };
     };
 
