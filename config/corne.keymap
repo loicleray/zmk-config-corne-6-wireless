@@ -122,7 +122,7 @@
         shift_ht: shift_ht {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
-            flavor = "hold-preferred";
+            flavor = "tap-preferred";   // decided by time only, not by other keys
             tapping-term-ms = <SHIFT_HOLD_TERM>;
             bindings = <&kp>, <&caps_word_p>;
         };
