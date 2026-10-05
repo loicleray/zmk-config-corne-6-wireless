@@ -31,13 +31,12 @@
 #define COMBO_TERM        25   // max ms between the keys of a combo
 #define COMBO_IDLE       200   // ms of idle required before a combo can fire
 
-// Modded Shift Terms
-#define SHIFT_TAP_TERM  180   // tap-dance window for the shift keys
-#define SHIFT_HOLD_TERM  240   // ms the 2nd press must be held to become caps-lock
+// Caps Combo Terms
+#define SHIFT_HOLD_TERM  240   // ms the caps combo must be held to become caps-lock
 
 // L and R Mirror Terms
-#define MIRROR_TD_TERM   180   // max ms from first press to second press (also how long a lone tap waits)
-#define MIRROR_HOLD_TERM 250   // ms the second press must be held to become the mirror key
+#define MIRROR_TD_TERM   200   // max ms from first press to second press (also how long a lone tap waits)
+#define MIRROR_HOLD_TERM 240   // ms the second press must be held to become the mirror key
 
 // Various Include
 #include <dt-bindings/zmk/modifiers.h>
@@ -180,14 +179,12 @@ MORPH_MIRROR_KEY(  M,   V     )
 MORPH_MIRROR_KEY(  N,   B     )
 
 /* ============================================================
- *  SHIFT KEYS
+ *  CAPS COMBOS
  * ------------------------------------------------------------
- *    tap or hold         -> shift (held while the key is down)
- *    quick double-tap    -> caps-word
- *    tap, then hold      -> caps-lock (while held past SHIFT_HOLD_TERM)
- *  Generates <name> (a tap-dance); bind it in the keymap.
- *  Same trick as the mirror keys, so a lone tap is sent after
- *  SHIFT_TAP_TERM, or straight away if another key is pressed.
+ *  The shift keys are plain shifts. Caps lives in two combos
+ *  (TAB + LSHIFT, ENTER + RSHIFT):
+ *    tap   -> caps-word
+ *    hold  -> caps-lock (while held past SHIFT_HOLD_TERM)
  * ============================================================
  */
 
@@ -213,15 +210,6 @@ MORPH_MIRROR_KEY(  N,   B     )
         };
     };
 };
-
-#define SHIFT_KEY(name, shiftkey)                                    \
-    ZMK_TAP_DANCE(name,                                              \
-        tapping-term-ms = <SHIFT_TAP_TERM>;                          \
-        bindings = <&kp shiftkey>, <&n_shift_ht CAPS 0>;             \
-    )
-
-SHIFT_KEY(td_lshift, LSHFT)
-SHIFT_KEY(td_rshift, RSHFT)
 
 /* ============================================================
  *  POINTER TUNING  (overrides ZMK's mouse move / scroll nodes)
@@ -421,6 +409,22 @@ SHIFT_KEY(td_rshift, RSHFT)
             layers = <0>;                   // Base layer only
         };
 
+        /* --- Caps: tap = caps-word, hold = caps-lock --- */
+
+        combo_caps_left {
+            bindings = <&n_shift_ht CAPS 0>;
+            key-positions = <12 24>;        // TAB + LSHIFT
+            timeout-ms = <COMBO_TERM>;
+            layers = <0>;
+        };
+
+        combo_caps_right {
+            bindings = <&n_shift_ht CAPS 0>;
+            key-positions = <23 35>;        // ENTER + RSHIFT
+            timeout-ms = <COMBO_TERM>;
+            layers = <0>;
+        };
+
         /* --- Utility keys --- */
 
         combo_globe {
@@ -483,8 +487,8 @@ SHIFT_KEY(td_rshift, RSHFT)
             bindings = <&kp ESC &Q_morph &W_morph &E_morph &R_morph &T_morph &Y_morph &U_morph
                         &I_morph &O_morph &P_morph &kp BSPC &kp TAB &A_morph &S_morph &D_morph
                         &F_morph &G_morph &H_morph &J_morph &K_morph &L_morph &SEMI_morph &kp ENTER
-                        &td_lshift &Z_morph &X_morph &C_morph &V_morph &B_morph &N_morph &M_morph
-                        &COMMA_morph &DOT_morph &FSLH_morph &td_rshift &kp LCTRL &kp LALT &cmd_space
+                        &kp LSHFT &Z_morph &X_morph &C_morph &V_morph &B_morph &N_morph &M_morph
+                        &COMMA_morph &DOT_morph &FSLH_morph &kp RSHFT &kp LCTRL &kp LALT &cmd_space
                         LGUI SPACE &lt 2 SPACE &mo 3 &mo 4>;
         };
 
