@@ -186,22 +186,37 @@ MORPH_MIRROR_KEY(  B,   N     )
 /* ============================================================
  *  SHIFT KEYS
  * ------------------------------------------------------------
- *    tap or hold         -> shift (held while the key is down)
- *    quick double-tap    -> caps-word
- *    tap, then hold      -> caps-lock (while held past SHIFT_HOLD_TERM)
- *  Generates <name> (a tap-dance); bind it in the keymap.
- *  Same trick as the mirror keys, so a lone tap is sent after
- *  SHIFT_TAP_SPEED, or straight away if another key is pressed.
+ *    hold, or another key pressed first -> shift, instantly
+ *    quick double-tap                   -> caps-word
+ *    tap, then hold                     -> caps-lock
+ *  A tap-dance can't be used on its own: it only presses its key
+ *  after a timer or a later keycode, so a quick Shift+X came out
+ *  lowercase. The outer hold-tap decides on the key press itself
+ *  (hold-preferred), so shift is down before the letter is replayed.
+ *  A tap falls through to the tap-dance, which counts the taps.
+ *  Bind as: &<name> <SHIFTKEY>   e.g. &td_lshift LSHFT
  * ============================================================
  */
-#define SHIFT_KEY(name, shiftkey)                                              \
-    ZMK_TAP_DANCE(name,                                                        \
+#define SHIFT_KEY(name)                                                        \
+    ZMK_TAP_DANCE(name##_taps,                                                 \
         tapping-term-ms = <SHIFT_TAP_SPEED>;                                   \
-        bindings = <&kp shiftkey>, <&shift_ht CAPS 0>;                         \
-    )
+        bindings = <&none>, <&shift_ht CAPS 0>;                                \
+    )                                                                          \
+    / {                                                                        \
+        behaviors {                                                            \
+            name: name {                                                       \
+                compatible = "zmk,behavior-hold-tap";                          \
+                #binding-cells = <1>;                                          \
+                flavor = "hold-preferred";                                     \
+                tapping-term-ms = <SHIFT_HOLD_TERM>;                           \
+                quick-tap-ms = <SHIFT_TAP_SPEED>;                              \
+                bindings = <&kp>, <&name##_taps>;                              \
+            };                                                                 \
+        };                                                                     \
+    };
 
-SHIFT_KEY(td_lshift, LSHFT)
-SHIFT_KEY(td_rshift, RSHFT)
+SHIFT_KEY(td_lshift)
+SHIFT_KEY(td_rshift)
 
 /* ============================================================
  *  POINTER TUNING  (overrides ZMK's mouse move / scroll nodes)
@@ -451,8 +466,8 @@ SHIFT_KEY(td_rshift, RSHFT)
             display-name = "Base";
             bindings = <&kp ESC &Q_morph &W_morph &E_morph &R_morph &T_morph &kp Y &kp U &kp I &kp O
                         &kp P &kp BSPC &kp TAB &A_morph &S_morph &D_morph &F_morph &G_morph &kp H
-                        &kp J &kp K &kp L &kp SEMI &kp ENTER &td_lshift &Z_morph &X_morph &C_morph
-                        &V_morph &B_morph &kp N &kp M &kp COMMA &kp DOT &kp FSLH &td_rshift &kp
+                        &kp J &kp K &kp L &kp SEMI &kp ENTER &td_lshift LSHFT &Z_morph &X_morph &C_morph
+                        &V_morph &B_morph &kp N &kp M &kp COMMA &kp DOT &kp FSLH &td_rshift RSHFT &kp
                         LCTRL &kp LALT &cmd_space LGUI SPACE &lt 2 SPACE &mo 3 &mo 4>;
         };
 
