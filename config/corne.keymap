@@ -182,10 +182,21 @@ MORPH_MIRROR_KEY(  B,   N     )
     behaviors {
         n_shift_ht: new_shift_hold_tap {
             compatible = "zmk,behavior-hold-tap";
-            #binding-cells = <1>;
+            #binding-cells = <2>;   // ZMK requires 2 for every hold-tap
             flavor = "tap-preferred";
             tapping-term-ms = <SHIFT_HOLD_TERM>;
-            bindings = <&kp>, <&caps_word>;
+            bindings = <&kp>, <&caps_word_p>;
+        };
+    };
+
+    macros {
+        /* caps_word with an ignored parameter, so it fits a 2-cell hold-tap. */
+        caps_word_p: caps_word_p {
+            compatible = "zmk,behavior-macro-one-param";
+            #binding-cells = <1>;
+            wait-ms = <0>;
+            tap-ms = <0>;
+            bindings = <&caps_word>;
         };
     };
 };
@@ -193,7 +204,7 @@ MORPH_MIRROR_KEY(  B,   N     )
 #define SHIFT_KEY(name, shiftkey)                                    \
     ZMK_TAP_DANCE(name,                                              \
         tapping-term-ms = <SHIFT_TAP_TERM>;                          \
-        bindings = <&kp shiftkey>, <&n_shift_ht CAPS>;               \
+        bindings = <&kp shiftkey>, <&n_shift_ht CAPS 0>;               \
     )
 
 SHIFT_KEY(td_lshift, LSHFT)
