@@ -335,3 +335,12 @@ combos:
 - p: [26, 27, 28]
   k: {t: NumPad, h: toggle}
   l: [Base, Mirror]
+- p: [19, 20, 21]
+  k: {t: Base, h: toggle}
+  l: [NumPad, Mirror]
+- p: [7, 8, 9]
+  k: {t: Mirror, h: toggle}
+  l: [Base, NumPad]
+- p: [32, 33, 31]
+  k: {t: NumPad, h: toggle}
+  l: [Base, Mirror]
