@@ -25,7 +25,7 @@ layers:
   - '&L_morph'
   - '&SEMI_morph'
   - ENTER
-  - '&td_lshift'
+  - LSHFT
   - '&Z_morph'
   - '&X_morph'
   - '&C_morph'
@@ -36,7 +36,7 @@ layers:
   - '&COMMA_morph'
   - '&DOT_morph'
   - '&FSLH_morph'
-  - '&td_rshift'
+  - RSHFT
   - LCTRL
   - LALT
   - {t: SPACE, h: LGUI}
@@ -309,6 +309,12 @@ combos:
   l: [Base]
 - p: [11, 23]
   k: '='
+  l: [Base]
+- p: [12, 24]
+  k: '&n_shift_ht CAPS 0'
+  l: [Base]
+- p: [23, 35]
+  k: '&n_shift_ht CAPS 0'
   l: [Base]
 - p: [36, 28]
   k: GLOBE
