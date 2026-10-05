@@ -119,7 +119,7 @@
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             flavor = "hold-preferred";
-            tapping-term-ms = <50>;
+            tapping-term-ms = <60>;
             bindings = <&kp>, <&kp>;
         };
 
