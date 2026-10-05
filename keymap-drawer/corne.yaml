@@ -7,11 +7,11 @@ layers:
   - '&E_morph'
   - '&R_morph'
   - '&T_morph'
-  - Y
-  - U
-  - I
-  - O
-  - P
+  - '&Y_morph'
+  - '&U_morph'
+  - '&I_morph'
+  - '&O_morph'
+  - '&P_morph'
   - BSPC
   - TAB
   - '&A_morph'
@@ -19,11 +19,11 @@ layers:
   - '&D_morph'
   - '&F_morph'
   - '&G_morph'
-  - H
-  - J
-  - K
-  - L
-  - ;
+  - '&H_morph'
+  - '&J_morph'
+  - '&K_morph'
+  - '&L_morph'
+  - '&SEMI_morph'
   - ENTER
   - '&td_lshift'
   - '&Z_morph'
@@ -31,11 +31,11 @@ layers:
   - '&C_morph'
   - '&V_morph'
   - '&B_morph'
-  - N
-  - M
-  - ','
-  - .
-  - /
+  - '&N_morph'
+  - '&M_morph'
+  - '&COMMA_morph'
+  - '&DOT_morph'
+  - '&FSLH_morph'
   - '&td_rshift'
   - LCTRL
   - LALT
