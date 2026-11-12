@@ -378,7 +378,7 @@
             key-positions = <13 17>;       // A + G
             timeout-ms = <COMBO_TERM>;
             require-prior-idle-ms = <COMBO_IDLE>;
-            layers = <0>;
+            layers = <0 1 2>;
         };
 
         combo_nav2_on_right {
@@ -386,7 +386,7 @@
             key-positions = <18 22>;       // H + ;
             timeout-ms = <COMBO_TERM>;
             require-prior-idle-ms = <COMBO_IDLE>;
-            layers = <0>;
+            layers = <0 1 2>;
         };
     };
 
