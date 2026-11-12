@@ -258,41 +258,41 @@ layers:
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {type: held}
-  Navigation2:
+  Nav Mirror:
   - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - UP
-  - {t: ▽, type: trans}
-  - BRI UP
-  - VOL UP
+  - '&msc SCRL_DOWN'
   - '&msc SCRL_RIGHT'
   - '&mmv MOVE_UP'
   - '&msc SCRL_LEFT'
-  - '&msc SCRL_DOWN'
+  - VOL UP
+  - BRI UP
+  - {t: ▽, type: trans}
+  - UP
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
-  - LEFT
-  - DOWN
-  - RIGHT
-  - BRI DN
-  - VOL DN
+  - {t: ▽, type: trans}
+  - '&msc SCRL_UP'
   - '&mmv MOVE_LEFT'
   - '&mmv MOVE_DOWN'
   - '&mmv MOVE_RIGHT'
-  - '&msc SCRL_UP'
+  - VOL DN
+  - BRI DN
+  - LEFT
+  - DOWN
+  - RIGHT
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - MUTE
-  - '&mkp MB1'
-  - '&mkp MB3'
   - '&mkp MB2'
+  - '&mkp MB3'
+  - '&mkp MB1'
+  - MUTE
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
@@ -341,7 +341,13 @@ combos:
 - p: [21, 22]
   k: ']'
   l: [Base]
+- p: [21, 33]
+  k: ']'
+  l: [Base]
 - p: [20, 21]
+  k: '['
+  l: [Base]
+- p: [20, 32]
   k: '['
   l: [Base]
 - p: [12, 0]
@@ -371,25 +377,25 @@ combos:
   k: TAB
 - p: [14, 15, 16]
   k: {t: Base, h: toggle}
+  l: [NumPad, Mirror, Nav Mirror]
+- p: [19, 20, 21]
+  k: {t: Base, h: toggle}
   l: [NumPad, Mirror]
 - p: [2, 3, 4]
+  k: {t: Mirror, h: toggle}
+  l: [Base, NumPad]
+- p: [7, 8, 9]
   k: {t: Mirror, h: toggle}
   l: [Base, NumPad]
 - p: [26, 27, 28]
   k: {t: NumPad, h: toggle}
   l: [Base, Mirror]
-- p: [19, 20, 21]
-  k: {t: Base, h: toggle}
-  l: [NumPad, Mirror]
-- p: [7, 8, 9]
-  k: {t: Mirror, h: toggle}
-  l: [Base, NumPad]
 - p: [32, 33, 31]
   k: {t: NumPad, h: toggle}
   l: [Base, Mirror]
-- p: [21, 33]
-  k: ']'
+- p: [13, 17]
+  k: {t: Nav Mirror, h: toggle}
   l: [Base]
-- p: [20, 32]
-  k: '['
+- p: [18, 22]
+  k: {t: Nav Mirror, h: toggle}
   l: [Base]
