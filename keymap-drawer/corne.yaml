@@ -112,11 +112,11 @@ layers:
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
-  - KP 0
+  - KP EQUAL
   - KP 1
   - {t: KP 2, h: .}
   - KP 3
-  - KP EQUAL
+  - KP 0
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
