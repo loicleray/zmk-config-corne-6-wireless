@@ -482,5 +482,15 @@
                                         &trans        &trans        &trans          &trans  &trans           &trans
             >;
         };
+
+        nav2_layer {
+            display-name = "Navigation2";
+            bindings = <
+&trans  &trans  &trans    &kp UP    &trans     &kp C_BRI_UP    &kp C_VOL_UP  &msc SCRL_RIGHT  &mmv MOVE_UP    &msc SCRL_LEFT   &msc SCRL_DOWN  &trans
+&trans  &trans  &kp LEFT  &kp DOWN  &kp RIGHT  &kp C_BRI_DN    &kp C_VOL_DN  &mmv MOVE_LEFT   &mmv MOVE_DOWN  &mmv MOVE_RIGHT  &msc SCRL_UP    &trans
+&trans  &trans  &trans    &trans    &trans     &trans          &kp C_MUTE    &mkp MB1         &mkp MB3        &mkp MB2         &trans          &trans
+                          &trans    &trans     &trans          &trans        &trans           &trans
+            >;
+        };
     };
 };
