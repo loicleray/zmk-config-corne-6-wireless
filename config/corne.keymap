@@ -151,7 +151,7 @@
 
         combo_exclamation {
             bindings = <&kp EXCLAMATION>;
-            key-positions = <1 0>;          // Q + ESC
+            key-positions = <1 13>;          // Q + ESC
             timeout-ms = <COMBO_TERM>;
             require-prior-idle-ms = <COMBO_IDLE>;
             layers = <0>;
@@ -159,7 +159,7 @@
 
         combo_at {
             bindings = <&kp AT>;
-            key-positions = <2 1>;          // W + Q
+            key-positions = <1 13>;          // W + Q
             timeout-ms = <COMBO_TERM>;
             require-prior-idle-ms = <COMBO_IDLE>;
             layers = <0>;
@@ -167,7 +167,7 @@
 
         combo_hash {
             bindings = <&kp HASH>;
-            key-positions = <3 2>;          // E + W
+            key-positions = <2 14>;          // E + W
             timeout-ms = <COMBO_TERM>;
             require-prior-idle-ms = <COMBO_IDLE>;
             layers = <0>;
@@ -175,7 +175,7 @@
 
         combo_dollar {
             bindings = <&kp DOLLAR>;
-            key-positions = <4 3>;          // R + E
+            key-positions = <3 15>;          // R + E
             timeout-ms = <COMBO_TERM>;
             require-prior-idle-ms = <COMBO_IDLE>;
             layers = <0>;
@@ -183,7 +183,7 @@
 
         combo_percent {
             bindings = <&kp PERCENT>;
-            key-positions = <5 4>;          // T + R
+            key-positions = <4 16>;          // T + R
             timeout-ms = <COMBO_TERM>;
             require-prior-idle-ms = <COMBO_IDLE>;
             layers = <0>;
@@ -191,7 +191,7 @@
 
         combo_caret {
             bindings = <&kp CARET>;
-            key-positions = <6 5>;          // Y + T
+            key-positions = <5 17>;          // Y + T
             timeout-ms = <COMBO_TERM>;
             require-prior-idle-ms = <COMBO_IDLE>;
             layers = <0>;
@@ -199,7 +199,7 @@
 
         combo_ampersand {
             bindings = <&kp AMPERSAND>;
-            key-positions = <7 6>;          // U + Y
+            key-positions = <6 18>;          // U + Y
             timeout-ms = <COMBO_TERM>;
             require-prior-idle-ms = <COMBO_IDLE>;
             layers = <0>;
@@ -207,7 +207,7 @@
 
         combo_asterisk {
             bindings = <&kp ASTERISK>;
-            key-positions = <8 7>;          // I + U
+            key-positions = <7 19>;          // I + U
             timeout-ms = <COMBO_TERM>;
             require-prior-idle-ms = <COMBO_IDLE>;
             layers = <0>;
@@ -215,7 +215,7 @@
 
         combo_parentheses-left {
             bindings = <&kp LEFT_PARENTHESIS>;
-            key-positions = <8 9>;          // I + O
+            key-positions = <8 20>;          // I + O
             timeout-ms = <COMBO_TERM>;
             require-prior-idle-ms = <COMBO_IDLE>;
             layers = <0>;
@@ -223,7 +223,7 @@
 
         combo_parentheses-right {
             bindings = <&kp RIGHT_PARENTHESIS>;
-            key-positions = <9 10>;         // O + P
+            key-positions = <9 21>;         // O + P
             timeout-ms = <COMBO_TERM>;
             require-prior-idle-ms = <COMBO_IDLE>;
             layers = <0>;
@@ -231,7 +231,7 @@
 
         combo_minus {
             bindings = <&kp MINUS>;
-            key-positions = <10 11>;        // P + BSPC
+            key-positions = <10 22>;        // P + BSPC
             timeout-ms = <COMBO_TERM>;
             require-prior-idle-ms = <COMBO_IDLE>;
             layers = <0>;
@@ -261,12 +261,12 @@
 
         combo_tilde {
             bindings = <&kp GRAVE>;
-            key-positions = <0 12>;         // ESC + TAB  (` and, with Shift, ~)
+            key-positions = <12 0>;         // ESC + TAB  (` and, with Shift, ~)
             layers = <0>;
         };
 
         combo_quotes {
-            bindings = <&kp SINGLE_QUOTE>;
+            bindings = <&kp SQT>;
             key-positions = <23 22>;        // ENTER + ;
             layers = <0>;                   // Base layer only
         };
@@ -302,22 +302,22 @@
 
         combo_del {
             bindings = <&kp BACKSPACE>;
-            key-positions = <5 17>;         // T + G
+            key-positions = <4 3>;         // T + G
         };
 
         combo_enter {
             bindings = <&kp ENTER>;
-            key-positions = <17 29>;        // G + B
+            key-positions = <16 15>;        // G + B
         };
 
         combo_esc {
             bindings = <&kp ESC>;
-            key-positions = <6 18>;         // Y + H
+            key-positions = <6 7>;         // Y + H
         };
 
         combo_tab {
             bindings = <&kp TAB>;
-            key-positions = <30 18>;        // N + H
+            key-positions = <18 19>;        // N + H
         };
 
         /* --- Layer toggles (three keys together) ---
