@@ -338,7 +338,7 @@
             key-positions = <19 20 21>;
             timeout-ms = <COMBO_TERM>;
             require-prior-idle-ms = <COMBO_IDLE>;
-            layers = <2 1>;
+            layers = <2 1 6>;
         };
 
         combo_mirror_on_left {
