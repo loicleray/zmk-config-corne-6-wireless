@@ -302,22 +302,22 @@
 
         combo_del {
             bindings = <&kp BACKSPACE>;
-            key-positions = <4 5>;         // T + G
+            key-positions = <16 17>;         // T + G
         };
 
         combo_enter {
             bindings = <&kp ENTER>;
-            key-positions = <16 17>;        // G + B
+            key-positions = <28 29>;        // G + B
         };
 
         combo_esc {
             bindings = <&kp ESC>;
-            key-positions = <6 7>;         // Y + H
+            key-positions = <18 19>;         // Y + H
         };
 
         combo_tab {
             bindings = <&kp TAB>;
-            key-positions = <18 19>;        // N + H
+            key-positions = <30 31>;        // N + H
         };
 
         /* --- Layer toggles (three keys together) ---
