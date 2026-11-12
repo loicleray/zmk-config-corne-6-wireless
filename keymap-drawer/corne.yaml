@@ -389,7 +389,7 @@ combos:
   l: [Base, Mirror]
 - p: [13, 17]
   k: {t: Nav Mirror, h: toggle}
-  l: [Base]
+  l: [Base, Mirror, NumPad]
 - p: [18, 22]
   k: {t: Nav Mirror, h: toggle}
-  l: [Base]
+  l: [Base, Mirror, NumPad]
