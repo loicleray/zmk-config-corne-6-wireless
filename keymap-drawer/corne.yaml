@@ -344,3 +344,9 @@ combos:
 - p: [32, 33, 31]
   k: {t: NumPad, h: toggle}
   l: [Base, Mirror]
+- p: [21, 33]
+  k: ']'
+  l: [Base]
+- p: [20, 32]
+  k: '['
+  l: [Base]
