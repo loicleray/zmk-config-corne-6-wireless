@@ -361,13 +361,13 @@ combos:
   l: [Base]
 - p: [36, 28]
   k: GLOBE
-- p: [4, 5]
-  k: BACKSPACE
 - p: [16, 17]
+  k: BACKSPACE
+- p: [28, 29]
   k: ENTER
-- p: [6, 7]
-  k: ESC
 - p: [18, 19]
+  k: ESC
+- p: [30, 31]
   k: TAB
 - p: [14, 15, 16]
   k: {t: Base, h: toggle}
