@@ -1785,6 +1785,14 @@ path.combo {
 <text x="196" y="89" class="combo tap layer-activator">Base</text>
 </a><text x="196" y="100" class="combo hold">toggle</text>
 </g>
+<g class="combo combopos-6">
+<path d="M644,89 l-37,2" class="combo"/>
+<path d="M644,89 l37,2" class="combo"/>
+<rect rx="6" ry="6" x="630" y="76" width="28" height="26" class="combo"/>
+<a href="#Base">
+<text x="644" y="89" class="combo tap layer-activator">Base</text>
+</a><text x="644" y="100" class="combo hold">toggle</text>
+</g>
 </g>
 </g>
 </svg>

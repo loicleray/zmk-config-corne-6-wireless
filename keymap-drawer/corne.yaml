@@ -374,7 +374,7 @@ combos:
   l: [NumPad, Mirror, Nav Mirror]
 - p: [19, 20, 21]
   k: {t: Base, h: toggle}
-  l: [NumPad, Mirror]
+  l: [NumPad, Mirror, Nav Mirror]
 - p: [2, 3, 4]
   k: {t: Mirror, h: toggle}
   l: [Base, NumPad]
